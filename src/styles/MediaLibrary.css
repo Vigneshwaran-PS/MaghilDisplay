@@ -1,0 +1,724 @@
+.media-library-container{
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.media-library-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.media-library-wrapper .media-library-header{
+    margin-bottom: 2rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+
+.media-library-wrapper .media-library-header h1{
+    color: white;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 3.7rem;
+    position: relative;
+}
+
+.all-library-medias{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    overflow-x: hidden;
+}
+
+/* Image landscaoe */
+.all-library-medias .image-container-landscape{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.image-container-landscape .image-header-landscape{
+    border-bottom: .1rem solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.image-header-landscape .image-orientation{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-container-landscape .image-header-landscape h1{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-container-landscape .image-list-landscape{
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(30rem,1fr));
+    row-gap: 3rem;
+    margin-top: 1rem;
+    overflow-x: hidden;
+}
+
+.image-list-landscape .image-card-landscape{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: .5rem .5rem;
+    width: 30rem;
+    height: 35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.10);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.image-card-landscape .image-view-landscape{
+    height: 70%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+
+.image-view-landscape picture{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    object-fit: contain; 
+}
+
+.image-view-landscape picture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    object-fit:fill;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Image landscape - content */
+
+.image-card-landscape .image-content-landscape {
+    flex: 1;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    margin-top: 0.5rem;
+}
+
+.image-content-landscape .image-name,
+.image-content-landscape .image-time,
+.image-content-landscape .image-size{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    color: black;
+}
+
+
+.image-content-landscape .image-name {
+    color: black;
+    font-size: 1.5rem;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image-content-landscape .image-time {
+   color: black;
+   font-size: 1.5rem;
+}
+
+.image-content-landscape .image-size {
+   color: black;
+   font-size: 1.5rem;
+}
+
+
+
+/* Image Potrait */
+.all-library-medias .image-container-portrait{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+
+.image-container-portrait .image-header-portrait{
+    border-bottom: .1rem solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+
+.image-header-portrait .image-orientation{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-container-portrait .image-header-landsportraitcape h1{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-container-portrait .image-list-portrait{
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+    max-height: 100%;
+    row-gap: 3rem;
+    margin-top: 1rem;
+    overflow-x: hidden;
+}
+
+.image-list-portrait .image-card-portrait{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: .5rem .5rem;
+    width: 25rem;
+    min-height: 40rem;
+    max-height: 50rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.10);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+
+.image-card-portrait .image-view-portrait{
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+}
+
+.image-view-portrait picture{
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    object-fit: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+
+.image-view-portrait picture img{
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    border-radius: 1.5rem;
+}
+
+.image-card-portrait .image-content-portrait{
+    flex: 1;
+    width: 100%;
+    padding: .5rem .5rem;
+}
+
+/* Image portrait - content */
+.image-card-portrait .image-content-portrait {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    margin-top: 0.5rem;
+}
+
+.image-content-portrait .image-name,
+.image-content-portrait .image-time,
+.image-content-portrait .image-size{
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    color: black;
+}
+
+
+.image-content-portrait .image-name {
+    color: black;
+    font-size: 1.5rem;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.image-content-portrait .image-time {
+   color: black;
+   font-size: 1.5rem;
+}
+
+.image-content-portrait .image-size {
+   color: black;
+   font-size: 1.5rem;
+}
+
+
+/* Video landscape */
+.all-library-medias .video-container-landscape{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.video-container-landscape .video-header-landscape{
+    border-bottom: .1rem solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.video-header-landscape .video-orientation{
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-container-landscape .video-header-landscape h1{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-container-landscape .video-list-landscape{
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(30rem,1fr));
+    row-gap: 3rem;
+    margin-top: 1rem;
+    overflow-x: hidden;
+}
+
+.video-list-landscape .video-card-landscape{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: .5rem .5rem;
+    width: 30rem;
+    height: 35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.10);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.video-card-landscape .video-view-landscape{
+    height: 70%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1.5rem;
+}
+
+.video-view-landscape picture{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1.5rem;
+    overflow: hidden;
+    object-fit: contain; 
+}
+
+
+.video-view-landscape picture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    object-fit:fill;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Video Content for Landscape */
+.video-card-landscape .video-content-landscape {
+    flex: 1;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    margin-top: 0.5rem;
+}
+
+.video-content-landscape .video-name,
+.video-content-landscape .video-time,
+.video-content-landscape .video-size {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    color: black;
+}
+
+.video-content-landscape .video-name {
+    color: black;
+    font-size: 1.5rem;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.video-content-landscape .video-time {
+    color: black;
+    font-size: 1.5rem;
+}
+
+.video-content-landscape .video-size {
+    color: black;
+    font-size: 1.5rem;
+}
+
+/* Video element styling */
+.video-view-landscape video {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    object-fit: cover;
+}
+
+/* Remove the picture and img styles for video view */
+.video-view-landscape {
+    height: 70%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Video Portrait */
+.all-library-medias .video-container-portrait {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.video-container-portrait .video-header-portrait {
+    border-bottom: .1rem solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.video-header-portrait .video-orientation {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-container-portrait .video-header-portrait h1 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.video-container-portrait .video-list-portrait {
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    row-gap: 3rem;
+    margin-top: 1rem;
+    overflow-x: hidden;
+}
+
+.video-list-portrait .video-card-portrait {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: .5rem .5rem;
+    width: 25rem;
+    min-height: 50rem;
+    max-height: 60rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.10);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.video-card-portrait .video-view-portrait {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 75%;
+}
+
+.video-view-portrait video {
+    width: 100%;
+    height: 100%;
+    border-radius: 1.5rem;
+    object-fit: cover;
+}
+
+/* Video Content for Portrait */
+.video-card-portrait .video-content-portrait {
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    margin-top: 0.5rem;
+}
+
+.video-content-portrait .video-name,
+.video-content-portrait .video-time,
+.video-content-portrait .video-size {
+    display: flex;
+    flex-direction: row;
+    gap: .5rem;
+    align-items: center;
+    color: black;
+}
+
+.video-content-portrait .video-name {
+    color: black;
+    font-size: 1.5rem;
+    position: relative;
+    white-space: nowrap;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.video-content-portrait .video-time {
+    color: black;
+    font-size: 1.5rem;
+}
+
+.video-content-portrait .video-size {
+    color: black;
+    font-size: 1.5rem;
+}
+
+
+
+.no-media-found{
+    width: 100%;
+    height: calc(100vh - 20rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 7%;
+    gap: 1.5rem;
+    scroll-behavior: smooth;
+    transition: all 1s linear;
+
+}
+
+.no-media-found .no-media-found-picture{
+    width: 15rem;
+
+}
+
+.no-media-found .no-media-found-picture img{
+    width: 15rem;
+}
+
+.no-media-found div{
+    width: 100%;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 500;
+    color: linear-gradient(135deg, #fab561, #e2c854) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Full screen image */
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: zoom-out;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.fullscreen-content {
+    position: relative;
+    max-width: 95vw;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: default;
+}
+
+.fullscreen-content img {
+    max-width: 100%;
+    max-height: 85vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease;
+}
+
+.fullscreen-content img:hover {
+    transform: scale(1.02);
+}
+
+
+
+/* Animation for fade in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .fullscreen-content img {
+        max-height: 75vh;
+    }
+    
+    .fullscreen-controls {
+        bottom: -80px;
+        padding: 0.8rem 1.5rem;
+        max-width: 90vw;
+    }
+    
+    .image-name-fullscreen {
+        font-size: 1.2rem;
+        max-width: 250px;
+    }
+    
+    .close-button {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+}
+
+/* Add hover effect to images to indicate they're clickable */
+.image-view-landscape img,
+.image-view-portrait img {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.image-view-landscape img:hover,
+.image-view-portrait img:hover {
+    transform: scale(1.05);
+    filter: brightness(1.1);
+}
+
+/* Add a subtle overlay hint on hover */
+.image-view-landscape::after,
+.image-view-portrait::after {
+    content: "🔍 Click to view fullscreen";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.image-view-landscape:hover::after,
+.image-view-portrait:hover::after {
+    opacity: 1;
+}

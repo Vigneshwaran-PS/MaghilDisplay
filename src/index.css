@@ -1,0 +1,22 @@
+:root{
+    --maghil: #e52333;
+}
+
+
+html, body, #root{
+    font-family: 'Poppins', sans-serif;
+    font-size: 63.5%;
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    transition: all .2s linear;
+    text-decoration: none;
+}

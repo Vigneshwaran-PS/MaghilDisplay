@@ -1,0 +1,144 @@
+.navbar-container{
+    position: absolute;
+    top: 110%;
+    right: 0rem;
+    width: 35rem;
+    max-width: 40rem;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+    color: white;
+    padding: 1rem 1rem;
+    font-size: 1.3rem;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    height: calc(100vh - 8rem);
+    z-index: 1000;
+    overlay: blax;
+    overflow: hidden;
+}
+
+.navbar-wrapper{
+    width: 100%;
+    height: 100%;
+}
+
+.navbar-wrapper h3{
+    font-weight: 500;
+    color: var(--maghil);
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: .5rem;
+    border-bottom: 2px solid rgba(248, 248, 248, 0.1);
+    position: relative;
+}
+
+.navbar-wrapper .navbar-content{
+    padding: 1rem 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    font-size: 1.5rem;
+}
+
+.navbar-wrapper .navbar-content .branches{
+    width: 95%;
+    margin-bottom: 3rem;
+}
+
+.navbar-wrapper .navbar-content .branches h5{
+    font-size: 1.5rem;
+    border-bottom: 2px solid rgba(248, 248, 248, 0.1);
+}
+
+.branches .branch{
+    font-size: 1.4rem;
+    margin: 1.4rem .5rem;
+    padding: .8rem .8rem;
+    background: rgba(255, 255, 255, 0.09);
+    border-radius: .5rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.branches .branch.active{
+    background-color: var(--maghil);
+}
+
+.branches .branch:hover{
+    transform: scale(1.03);
+}
+
+.navbar-wrapper .navbar-content .library{
+    width: 95%;
+    margin-bottom: 3rem;
+    overflow-x: hidden;
+}
+
+.navbar-wrapper .navbar-content .library h5{
+    font-size: 1.5rem;
+    border-bottom: 2px solid rgba(248, 248, 248, 0.1);
+}
+
+.library .media{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.09) !important;
+    border-radius: .5rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 1.4rem .5rem;
+    padding: .8rem .8rem;
+}
+
+.library .media:hover{
+    transform: scale(1.04);
+}
+
+.library .media picture{
+    width: 3.5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.library .media picture img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.library .media .library-name{
+    flex: 1;
+}
+
+.navbar-wrapper .logout{
+    position:absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 92%;
+    background-color: var(--maghil);
+    border-radius: .5rem;
+    margin: 1.4rem .5rem;
+    padding: .5rem .5rem;
+    border-radius: .5rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logout button{
+    background-color: var(--maghil);
+    color: white;
+    font-size: 1.8rem;
+    cursor: pointer;
+}

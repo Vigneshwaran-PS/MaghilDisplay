@@ -1,0 +1,210 @@
+.login-container{
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: url('../assets/images/Login-background-1.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-wrapper {
+    background: linear-gradient(135deg,rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(.8rem) saturate(100%);
+    -webkit-backdrop-filter: blur(.8rem) saturate(100%);
+    border-radius: 1.5rem;
+    width: 40rem;
+    max-width: 95%;
+    box-shadow: 0 0.8rem 2.5rem rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    z-index: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+
+.maghil-logo{
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo-and-maghil-text{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid black;
+}
+
+.logo-and-maghil-text img{
+    width: 5rem;
+    height: 5rem;
+}
+
+
+.logo-and-maghil-text h1{
+    flex: 1;
+    font-size: 5.1rem;
+    color: rgb(42, 40, 40);
+    transform: translateZ(20px);
+}
+
+.maghil-slogon{
+    margin-top: 1rem;
+    font-size: 1.4rem;
+    color: black;
+    font-weight: 500;
+}
+
+.login-fields{
+    width: 95%;
+    padding: 0 2rem;
+    padding-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.login-business-name,
+.login-user-id,
+.login-user-password,
+.login-submit-button{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+    font-size: 1.5rem;
+    color: black;
+}
+
+
+.login-business-name label,
+.login-user-id label,
+.login-user-password label,
+.login-submit-button label{
+    font-weight: 600;
+}
+
+.login-business-name input,
+.login-user-id input,
+.login-user-password input{
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: black;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    transform: translateZ(0);
+}
+
+.login-user-password input{
+    padding-right: 4rem;
+}
+
+
+.login-business-name input:-webkit-autofill,
+.login-user-id input:-webkit-autofill,
+.login-user-password input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.1) inset !important;
+    -webkit-text-fill-color: black !important; 
+    caret-color: black !important; 
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
+
+.login-business-name input:focus,
+.login-user-id input:focus,
+.login-user-password input:focus{
+    outline: none;
+    border-color: var(--maghil);
+    box-shadow: 0 0 0 2px rgba(229, 35, 51, 0.2);
+    transform: translateZ(.5rem);
+}
+
+.login-submit-button button{
+    background-color: var(--maghil);
+    padding: 1.4rem 0;
+    color: white;
+    border-radius: 1rem;
+    font-weight: bold;
+    font-size: 1.8rem;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-submit-button button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.login-submit-button button:hover {
+    background: var(--maghil);
+    transform: translateY(-2px) translateZ(15px);
+    box-shadow: 0 5px 15px rgba(229, 35, 51, 0.4);
+}
+
+.login-submit-button button:hover::before {
+    left: 100%;
+}
+
+.login-error-message{
+    color: rgb(247, 31, 31);
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.login-user-password .password-and-icon {
+    position: relative;
+    display: flex;
+    overflow: hidden;
+}
+
+.login-user-password .password-eye{
+    position: absolute;
+    right: .5rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.password-eye picture{
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.password-and-icon picture img{
+    width: 2rem;
+    height: 2rem;
+    object-fit: contain;
+}
+
+
+

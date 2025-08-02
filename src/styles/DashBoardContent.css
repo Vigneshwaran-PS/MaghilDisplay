@@ -1,0 +1,7 @@
+.dashboard-content-container{
+    height: 100%;
+    padding: 8.5rem 5rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
