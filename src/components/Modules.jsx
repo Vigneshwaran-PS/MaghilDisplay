@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import '../styles/Modules.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { moduleThunk } from '../thunks/ModulesThunk'
-import spotlightIcon from '../assets/icons/spotlight.png'
+import spotlightIcon from '../assets/icons/Spotlight.png'
 import orderModuleIcon from '../assets/icons/OrderModule.png'
 import checkInModuleIcon from '../assets/icons/CheckInModule.png'
 
