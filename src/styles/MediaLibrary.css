@@ -522,7 +522,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 75%;
+    height: 78%;
 }
 
 .video-view-portrait video {
@@ -534,6 +534,7 @@
 
 /* Video Content for Portrait */
 .video-card-portrait .video-content-portrait {
+    flex: 1;
     width: 100%;
     padding: 1rem;
     display: flex;
@@ -726,3 +727,164 @@
 .image-view-portrait:hover::after {
     opacity: 1;
 }
+
+
+/* Delete Media */
+
+.delete-media{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 3rem;
+    height: 3rem;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.7);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+
+.delete-media:hover {
+    background: #ff4757;
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3);
+}
+
+
+.delete-media .delete-media-icon{
+    width: 65%;
+    height: 65%;
+    filter: brightness(100%) saturate(100%);
+}
+
+/* Delete Confirmation Modal Styles */
+.delete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  .delete-modal {
+    width: 90%;
+    max-width: 420px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+    color: white;
+  }
+  
+  .delete-modal-header {
+    padding: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+  
+  .delete-modal-header h3 {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+  
+  .delete-modal-content {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .delete-modal-content p {
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  }
+  
+  .delete-warning {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffd166;
+  }
+  
+  .delete-modal-actions {
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5rem 2rem 2rem;
+    gap: 1rem;
+  }
+  
+  .cancel-button,
+  .confirm-delete-button {
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    border: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    min-width: 120px;
+  }
+  
+  .cancel-button {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .cancel-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    transform: scale(1.02);
+  }
+  
+  .confirm-delete-button {
+    background: #ff4757;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .confirm-delete-button:hover {
+    background: #ff2e44;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(255, 71, 87, 0.4);
+  }
+  
+  /* Animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  

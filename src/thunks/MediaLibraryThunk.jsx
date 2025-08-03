@@ -47,7 +47,23 @@ const uploadMediaThunk = createAsyncThunk(
         return rejectWithValue(error.message);
       }
     }
-  );
+);
+
+
+const deleteMediaThunk = createAsyncThunk(
+    "/dashboard/delete-media",
+    async (mediaId, {rejectWithValue}) => {
+
+      try{
+        const response = await API.delete(
+          `/api/v2/maghil-display/library/delete?mediaId=${mediaId}`
+        )
+        return response.data
+      }catch(error){
+        return rejectWithValue(error.message)
+      }
+    }
+)
   
 
-export {mediaLibraryThunk, uploadMediaThunk}
+export {mediaLibraryThunk, uploadMediaThunk, deleteMediaThunk}

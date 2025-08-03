@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import '../styles/MediaLibrary.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { mediaLibraryThunk } from '../thunks/MediaLibraryThunk'
+import { deleteMediaThunk, mediaLibraryThunk } from '../thunks/MediaLibraryThunk'
 import noMediaFound from '../../src/assets/icons/NoMediaFound.png'
+import deleteIcon from '../../src/assets/icons/trash.svg'
 import { GCP_API } from '../api/api'
+import { useNavigate } from 'react-router-dom'
+import Loader from '../components/Loader.jsx'
+
 
 const MediaLibrary = () => {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     const {data} = useSelector(state => state.slug)
     const mediaLibrary = useSelector(state => state.mediaLibrary)
+    const deleteMedia = useSelector(state => state.deleteMedia)
 
     const [fullScreenImage,setFullScreenImage] = useState(null)
+    const [confirmDelete, setConfirmDelete] = useState(null)
 
     const openFullScreenImage = (imageUrl, imageName) => {
         setFullScreenImage({url : imageUrl, name : imageName})
@@ -19,6 +26,32 @@ const MediaLibrary = () => {
     
     const closeFullScreenImage = () => {
         setFullScreenImage(null)
+    }
+
+    const handleDelete = (mediaId, mediaName) => {
+        setConfirmDelete({mediaId,mediaName})
+    }
+
+    const cancelDelete = () => {
+        setConfirmDelete(null);
+    }
+
+    const confirmDeleteMedia = async() => {
+        if (!confirmDelete) return;
+        
+        try {
+            console.log('Deleting media:', confirmDelete.mediaId);
+            if (confirmDelete.mediaId) {
+               await dispatch(deleteMediaThunk(confirmDelete.mediaId)).unwrap();
+               navigate('/dashboard/library', { replace: true });
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error deleting media:', error);
+        } finally {
+            navigate('/dashboard/library', { replace: true });
+            window.location.reload();
+        }
     }
 
     useEffect(() => {
@@ -33,9 +66,6 @@ const MediaLibrary = () => {
 
     },[fullScreenImage])
 
-    useEffect(() => {
-        console.log("Library",mediaLibrary)
-    },[mediaLibrary])
   
     useEffect(() => {
         const locationId = data?.id
@@ -59,14 +89,11 @@ const MediaLibrary = () => {
     const medias = getLibrarymedias();
 
     const getMediaUrl = (mediaData) => {
-        console.log(mediaData)
-
         const mediaId = mediaData?.mediaId;
         const mimeTye = mediaData?.mimeType;
 
         if(mediaId && mimeTye){
             const url = `${GCP_API.defaults.baseURL}/${mediaId}.${mimeTye.split('/')[1]}`
-            console.log("URL", url)
             return url;
         }
         return ""
@@ -109,6 +136,14 @@ const MediaLibrary = () => {
                 <div className={listClass}>
                     {mediaArray.map(media => (
                         <div className={cardClass} key={media.mediaId}>
+                            <div className="delete-media">
+                                <img 
+                                    src={deleteIcon} 
+                                    alt="" 
+                                    className='delete-media-icon'
+                                    onClick={()=> handleDelete(media.mediaId, media.name)}
+                                />
+                            </div>
                             <div className={viewClass}>
                                 {isVideo ? (
                                     <video controls>
@@ -117,7 +152,7 @@ const MediaLibrary = () => {
                                     </video>
                                 ) : (
                                     <picture>
-                                        <img 
+                                        <img
                                             src={getMediaUrl(media)} 
                                             alt="" 
                                             onClick={() => openFullScreenImage(getMediaUrl(media), media.name)}
@@ -177,6 +212,35 @@ const MediaLibrary = () => {
                         </div>
                     </div>
             )}
+
+            {/* Delete Confirmation Modal */}
+            {
+                confirmDelete && (
+                    <div className="delete-overlay" onClick={cancelDelete}>
+                        <div className="delete-modal" onClick={(e) => e.stopPropagation()}>
+                            <div className="delete-modal-header">
+                                <h3>Delete Media</h3>
+                            </div>
+                            <div className="delete-modal-content">
+                                <p>Are you sure you want to delete "{confirmDelete.mediaName}"?</p>
+                                <p className="delete-warning">This action cannot be undone.</p>
+                            </div>
+                            <div className="delete-modal-actions">
+                                <button className="cancel-button" onClick={cancelDelete}>
+                                    Cancel
+                                </button>
+                                <button className="confirm-delete-button" onClick={confirmDeleteMedia}>
+                                    {
+                                        deleteMedia.loading 
+                                        ? <Loader  size='large' variant='dots'/>
+                                        : "Delete"
+                                    }
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }

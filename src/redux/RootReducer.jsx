@@ -5,6 +5,7 @@ import restaurantSlugSlice from '../slices/RestaurantSlugSlice';
 import moduleSlice from '../slices/ModuleSlice';
 import mediaLibrarySlice from '../slices/MediaLibrarySlice';
 import uploadMediaSlice from '../slices/UploadMediaSlice';
+import deleteMediaSlice from '../slices/DeleteMediaSlice';
 
 
 const rootReducer = combineReducers({
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     modules : moduleSlice,
     mediaLibrary : mediaLibrarySlice,
     uploadMedia : uploadMediaSlice,
+    deleteMedia : deleteMediaSlice,
 })
 
 export default rootReducer
