@@ -67,6 +67,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(30rem,1fr));
     row-gap: 3rem;
+    column-gap: 2rem;
     margin-top: 1rem;
     overflow-x: hidden;
 }
@@ -199,7 +200,8 @@
 .image-container-portrait .image-list-portrait{
     padding: 2rem 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(30rem,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(30rem,1fr));
+    gap: 1rem;
     max-height: 100%;
     row-gap: 3rem;
     margin-top: 1rem;
@@ -339,6 +341,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(30rem,1fr));
     row-gap: 3rem;
+    column-gap: 2rem;
     margin-top: 1rem;
     overflow-x: hidden;
 }
@@ -487,6 +490,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     row-gap: 3rem;
+    column-gap: 2rem;
     margin-top: 1rem;
     overflow-x: hidden;
 }
