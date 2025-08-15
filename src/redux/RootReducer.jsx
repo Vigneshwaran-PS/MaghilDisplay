@@ -6,6 +6,7 @@ import moduleSlice from '../slices/ModuleSlice';
 import mediaLibrarySlice from '../slices/MediaLibrarySlice';
 import uploadMediaSlice from '../slices/UploadMediaSlice';
 import deleteMediaSlice from '../slices/DeleteMediaSlice';
+import spotlightSlice from '../slices/SpotLightSlice';
 
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
     mediaLibrary : mediaLibrarySlice,
     uploadMedia : uploadMediaSlice,
     deleteMedia : deleteMediaSlice,
+    spotlight : spotlightSlice
 })
 
 export default rootReducer

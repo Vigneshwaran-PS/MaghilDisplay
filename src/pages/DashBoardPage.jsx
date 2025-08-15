@@ -10,8 +10,7 @@ const DashBoardPage = () => {
 
   const dispatch = useDispatch()
   const {data} = useSelector(state => state.slug)
-  const locationId = useSelector(state => state.auth?.data?.locationId)
-
+  const locationId = localStorage.getItem('selectedLocation')
   useEffect(() => {
 
     if(!data && locationId){

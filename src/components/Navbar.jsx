@@ -20,10 +20,8 @@ const Navbar = ({showNavBar,setShowNavBar}) => {
 
 
   const switchBranch = (branch) => {
-    console.log(branch.id)
+    localStorage.setItem('selectedLocation',branch.id)
     setShowNavBar(!showNavBar)
-    localStorage.clear();
-    sessionStorage.clear();
     dispatch(restaurantSlugThunk(branch.id))
     navigate('/dashboard/modules')
   }
@@ -32,6 +30,8 @@ const Navbar = ({showNavBar,setShowNavBar}) => {
   const logoutMerchant = () => {
     dispatch(logout())
     navigate('/login')
+    localStorage.clear()
+    sessionStorage.clear()
   }
 
   return (

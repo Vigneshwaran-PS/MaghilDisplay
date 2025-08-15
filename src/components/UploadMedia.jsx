@@ -7,6 +7,7 @@ import fileUpload from '../assets/icons/fileupload.png'
 import { uploadMediaThunk } from '../thunks/MediaLibraryThunk'
 import Loader from './Loader'
 import { useNavigate } from 'react-router-dom'
+import * as Colors from '../constants/Colors';
 
 
  // File validation constants
@@ -98,7 +99,10 @@ const UploadMedia = () => {
         const validation = validateFile(file)
         
         if (!validation.isValid) {
-            dispatch(showErrorToast(validation.error))
+            dispatch(showErrorToast({
+                message : validation.error, 
+                backGroundColor : Colors.MAGHIL
+            }))
             return
         }
 
@@ -155,17 +159,26 @@ const UploadMedia = () => {
     // Handle upload button click
     const handleUpload = async() => {
         if (!selectedFile) {
-            dispatch(showErrorToast('Please select a file to upload'))
+            dispatch(showErrorToast({
+                message : 'Please select a file to upload', 
+                backGroundColor : Colors.MAGHIL
+            }))
             return
         }
         
         if (!mediaName.trim()) {
-            dispatch(showErrorToast('Please enter a media name'))
+            dispatch(showErrorToast({
+                message : 'Please enter a media name', 
+                backGroundColor : Colors.MAGHIL
+            }))
             return
         }
         
         if (!orientation) {
-            dispatch(showErrorToast('Please select an orientation'))
+            dispatch(showErrorToast({
+                message : 'Please select an orientation', 
+                backGroundColor : Colors.MAGHIL
+            }))
             return
         }
 
@@ -188,7 +201,10 @@ const UploadMedia = () => {
             await dispatch(uploadMediaThunk(uploadData)).unwrap();
             navigate('/dashboard/library'); 
         } catch (error) {
-            dispatch(showErrorToast(error));
+            dispatch(showErrorToast({
+                message : error, 
+                backGroundColor : Colors.MAGHIL
+            }));
             navigate('/dashboard/library'); 
         }
     }
@@ -352,7 +368,10 @@ const UploadMedia = () => {
                                             src={preview.url} 
                                             alt="Preview"
                                             onError={() => {
-                                                dispatch(showErrorToast('Failed to load image preview'))
+                                                dispatch(showErrorToast({
+                                                    message : 'Failed to load image preview', 
+                                                    backGroundColor : Colors.MAGHIL
+                                                }))
                                             }}
                                         />
                                     </div>
@@ -363,7 +382,10 @@ const UploadMedia = () => {
                                             src={preview.url} 
                                             controls
                                             onError={() => {
-                                                dispatch(showErrorToast('Failed to load video preview'))
+                                                dispatch(showErrorToast({
+                                                    message : 'Failed to load video preview', 
+                                                    backGroundColor : Colors.MAGHIL
+                                                }))
                                             }}
                                         >
                                          Your browser does not support the video tag.

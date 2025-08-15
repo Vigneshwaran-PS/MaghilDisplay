@@ -30,11 +30,12 @@ const LoginPage = () => {
 
         if(error && !isAuthenticated){
             dispatch(clearErrorToast())
-            dispatch(showErrorToast(error))
+            dispatch(showErrorToast({message : error}))
             return
         }
 
         if(isAuthenticated && data){
+            localStorage.setItem('selectedLocation',data.locationId)
             dispatch(restaurantSlugThunk(data.locationId))
             navigate('/dashboard', { replace: true });
         }

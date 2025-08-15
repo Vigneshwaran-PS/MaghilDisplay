@@ -5,10 +5,12 @@ import { moduleThunk } from '../thunks/ModulesThunk'
 import spotlightIcon from '../assets/icons/Spotlight.png'
 import orderModuleIcon from '../assets/icons/OrderModule.png'
 import checkInModuleIcon from '../assets/icons/CheckInModule.png'
+import { useNavigate } from 'react-router-dom'
 
 const Modules = () => {
 
-    const dispatch = useDispatch()
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const locationId = useSelector(state => state.slug?.data?.id)
     const modulesData = useSelector(state => state.modules)
 
@@ -43,6 +45,29 @@ const Modules = () => {
         }
         return orderModuleIcon;
     }
+
+
+    const chooseModuleAndNavigate = (module) => {
+        const templateId = module?.templateId
+        const templateType = module?.templateType?.toLowerCase();
+        if(templateType == "media"){
+            const route = "/dashboard/modules/spotlight"
+            navigate(`${route}/${locationId}/${templateId}`);
+            return;
+        }
+
+        if(templateType == "check_in"){
+            const route = "/dashboard/modules/spotlight"
+            navigate(`${route}/${locationId}/${templateId}`);
+            return;
+        }
+
+        if(templateType == "orders"){
+            const route = "/dashboard/modules/spotlight"
+            navigate(`${route}/${locationId}/${templateId}`);
+            return;
+        }
+    }
     
   return (
     <div className='module-container'>
@@ -56,7 +81,11 @@ const Modules = () => {
                 {
                     getModules().map(module => {
                         return (
-                            <div className={`module ${module.templateType.toLowerCase()}`} key={module.templateType}>
+                            <div 
+                                className={`module ${module.templateType.toLowerCase()}`} 
+                                key={module.templateType}
+                                onClick={() => chooseModuleAndNavigate(module)}
+                            >
                                 <picture>
                                     <img src={getModuleLogo(module)} alt="" />
                                 </picture>

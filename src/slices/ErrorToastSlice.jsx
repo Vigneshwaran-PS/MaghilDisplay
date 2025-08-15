@@ -6,16 +6,19 @@ const errorToastSlice = createSlice({
     name : 'error-toast',
     initialState : {
         isShowingToast : false,
-        message : ""
+        message : "",
+        backGroundColor : ""
     },
     reducers : {
         showErrorToast : (state,action) => {
-            state.message = action.payload,
-            state.isShowingToast = true
+            state.message = action.payload.message;
+            state.isShowingToast = true;
+            state.backGroundColor = action.payload.backGroundColor
         },
         clearErrorToast : (state) => {
-            state.message = "",
-            state.isShowingToast = false
+            state.message = "";
+            state.isShowingToast = false;
+            state.backGroundColor = ""
         }
     }
 })

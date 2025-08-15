@@ -6,7 +6,7 @@ import { closeError } from '../slices/LoginSlice'
 
 const ErrorToast = () => {
     const dispatch = useDispatch()
-    const {message, isShowingToast} = useSelector(state => state.errorToast)
+    const {message, isShowingToast, backGroundColor} = useSelector(state => state.errorToast)
     const [show, setShow] = useState(false)
 
     useEffect(() => {
@@ -28,7 +28,9 @@ const ErrorToast = () => {
     if (!isShowingToast) return null
 
     return (
-        <div className={`error-toast-container ${show ? 'show' : ''}`}>
+        <div className={`error-toast-container ${show ? 'show' : ''}`}
+            style={{backgroundColor : backGroundColor ? backGroundColor : ""}}    
+        >
             <div className="error-toast-wrapper">
                 <div className="error-message">
                     {message}

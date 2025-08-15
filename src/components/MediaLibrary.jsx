@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/MediaLibrary.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteMediaThunk, mediaLibraryThunk } from '../thunks/MediaLibraryThunk'
-import noMediaFound from '../../src/assets/icons/NoMediaFound.png'
+import noMediaFound from '../../src/assets/icons/NoData.png'
 import deleteIcon from '../../src/assets/icons/trash.svg'
 import { GCP_API } from '../api/api'
 import { useNavigate } from 'react-router-dom'
@@ -40,11 +40,10 @@ const MediaLibrary = () => {
         if (!confirmDelete) return;
         
         try {
-            console.log('Deleting media:', confirmDelete.mediaId);
             if (confirmDelete.mediaId) {
                await dispatch(deleteMediaThunk(confirmDelete.mediaId)).unwrap();
                navigate('/dashboard/library', { replace: true });
-                window.location.reload();
+               window.location.reload();
             }
         } catch (error) {
             console.error('Error deleting media:', error);
