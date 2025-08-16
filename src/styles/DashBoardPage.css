@@ -4,6 +4,23 @@
     overflow: hidden;
     font-size: 1.5rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* background: linear-gradient(135deg, #000000, #1a1a1a, #3d3d3d); */
+
+
+    /* background: #3494E6; 
+    background: -webkit-linear-gradient(to right, #EC6EAD, #3494E6);
+    background: linear-gradient(to right, #EC6EAD, #3494E6);  */
+
+
+    /* background: #4568DC;
+    background: -webkit-linear-gradient(to right, #B06AB3, #4568DC); 
+    background: linear-gradient(to right, #B06AB3, #4568DC); */
+
+    
+    /* background: #4e54c8; 
+    background: -webkit-linear-gradient(to right, #8f94fb, #4e54c8);  
+    background: linear-gradient(to right, #8f94fb, #4e54c8); */
+
 }
 
 

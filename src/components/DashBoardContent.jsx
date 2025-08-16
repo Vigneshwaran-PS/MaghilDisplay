@@ -7,6 +7,7 @@ import MediaLibrary from './MediaLibrary'
 import UploadMedia from './UploadMedia'
 import Spotlight from './Spotlight'
 import SpotlightPlayer from './SpotlightPlayer'
+import ViewSpotlight from './ViewSpotlight'
 
 const DashBoardContent = () => {
   return (
@@ -18,6 +19,7 @@ const DashBoardContent = () => {
               <Route path='upload-media' element={<UploadMedia/>}/>
               <Route path='modules/spotlight/:locationId/:templateId' element={<Spotlight/>}/>
               <Route path='modules/spotlight/player/:displayId' element={<SpotlightPlayer/>}/>
+              <Route path='modules/spotlight/view/:displayId' element={<ViewSpotlight/>}/>
             </Routes>
         </div>
     </div>

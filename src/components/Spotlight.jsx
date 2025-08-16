@@ -81,7 +81,6 @@ const Spotlight = () => {
             }
 
             const displayData = result.spotLightDisplays[0];
-            console.log("test",displayData);
             if (!displayData?.spotLightMedia || displayData.spotLightMedia.length === 0) {
                 dispatch(showErrorToast({
                     message: "There is no media to play the spotlight, please add some media.",
@@ -90,13 +89,7 @@ const Spotlight = () => {
                 return;
             }
 
-            navigate(`/dashboard/modules/spotlight/player/${template.displayId}`, {
-                state: {
-                    displayData,
-                    orientation: template.orientation || displayData.orientation,
-                    displayName: template.displayName || displayData.displayName
-                }
-            });
+            navigate(`/dashboard/modules/spotlight/player/${template.displayId}`);
             
         } catch (error) {
             console.error("Error occurred while fetching medias:", error);
@@ -107,6 +100,33 @@ const Spotlight = () => {
         } finally {
             setLoadingSpotLight(null);
         }
+    }
+
+    const viewSpotlight = async (template,buttonType) => {
+        if(template && template?.displayId){
+            try {
+                setLoadingSpotLight({
+                    loading : true,
+                    displayId : template.displayId,
+                    buttonType
+                });
+                
+                await dispatch(spotLightMediasThunk(template.displayId)).unwrap();
+    
+                navigate(`/dashboard/modules/spotlight/view/${template.displayId}`);
+                
+            } catch (error) {
+                console.error("Error occurred while fetching medias:", error);
+                dispatch(showErrorToast({
+                    message: "Failed to load media. Please try again.",
+                    backGroundColor: Colors.MAGHIL
+                }));
+            } finally {
+                setLoadingSpotLight(null);
+            }
+        
+        }
+
     }
 
 
@@ -159,6 +179,7 @@ const Spotlight = () => {
                                                     
                                                         <button className="action-btn view-btn"
                                                                 disabled = {loadingSpotLight?.loading}
+                                                                onClick={()=>viewSpotlight(template,'view')}
                                                         >
                                                             {
                                                                 loadingSpotLight?.loading && 
@@ -223,6 +244,7 @@ const Spotlight = () => {
 
                                                         <button className="action-btn view-btn"
                                                                 disabled = {loadingSpotLight?.loading}
+                                                                onClick={()=>viewSpotlight(template, 'view')}
                                                         >
                                                             {
                                                                 loadingSpotLight?.loading && 

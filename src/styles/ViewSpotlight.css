@@ -1,0 +1,606 @@
+.view-spotlight-container{
+    width: 100%;
+    /* overflow-x: hidden; */
+}
+
+.view-spotlight-wrapper{
+    width: 100%;
+    /* overflow-x: hidden; */
+}
+
+.view-spotlight-header{
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.view-spotlight-header h1 {
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(42, 42, 42, 0.1);
+}
+
+.spotlight-options {
+    position: relative;
+    display: inline-block;
+}
+
+.spotlight-setting{
+    width: 6rem;
+    height: 6rem;
+    object-fit: contain;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-origin: center center;
+    border-radius: 50%;
+    padding: 8px;
+    border: 2px solid transparent;
+    will-change: transform;
+}
+
+
+.spotlight-setting.rotate-open {
+    transform: rotate(90deg) scale(1.15);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.spotlight-setting.rotate-close {
+    transform: rotate(0deg) scale(1);
+    transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    border-radius: 5px;
+    min-width: 160px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+}
+
+.options.show {
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    z-index: 9999;
+}
+
+.options button {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    text-align: left;
+    font-size: 1.5rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s ease;
+    background: rgb(19, 19, 19);
+    backdrop-filter: blur(1px);
+    cursor: pointer;
+    box-shadow: 0 0 0 rgba(31, 31, 31, 0.1);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.options button:first-child{
+    border-bottom: 1px solid white;
+}
+
+.options.show {
+    animation: dropdownSlideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+
+.options button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;  
+    transition: left 0.5s;
+}
+
+.options button:hover::before {
+    left: 100%;
+}
+
+
+.options button.delete-option::before {
+    background: linear-gradient(90deg, transparent, rgba(138, 138, 138, 0.1), transparent);
+}
+
+.options button:hover {
+    padding-left: 2rem;
+}
+
+
+@keyframes smoothSpinOpen {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    20% {
+        transform: rotate(10deg) scale(1.02);
+    }
+    40% {
+        transform: rotate(30deg) scale(1.05);
+    }
+    60% {
+        transform: rotate(50deg) scale(1.08);
+    }
+    80% {
+        transform: rotate(75deg) scale(1.12);
+    }
+    100% {
+        transform: rotate(90deg) scale(1.15);
+    }
+}
+
+@keyframes smoothSpinClose {
+    0% {
+        transform: rotate(90deg) scale(1.15);
+    }
+    20% {
+        transform: rotate(75deg) scale(1.12);
+    }
+    40% {
+        transform: rotate(50deg) scale(1.08);
+    }
+    60% {
+        transform: rotate(30deg) scale(1.05);
+    }
+    80% {
+        transform: rotate(10deg) scale(1.02);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+.spotlight-setting.rotate-open {
+    animation: smoothSpinOpen 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.spotlight-setting.rotate-close {
+    animation: smoothSpinClose 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+
+@keyframes dropdownSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.9);
+    }
+    50% {
+        opacity: 0.8;
+        transform: translateY(-5px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes dropdownSlideOut {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(-5px) scale(0.98);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.9);
+    }
+}
+
+
+.spotlight-view-content{
+    width: 100%;
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+
+.spotlight-display-details{
+    width: 98%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    border-bottom: 1px dotted black;
+    padding-bottom: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.spotlight-name,
+.spotlight-orientation,
+.spotlight-media-count{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.spotlight-name h3,
+.spotlight-orientation h3,
+.spotlight-media-count h3{
+    flex: .3;
+}
+
+.spotlight-name span,
+.spotlight-orientation span,
+.spotlight-media-count span{
+    flex: .1;
+    font-weight: 600;
+}
+
+
+.spotlight-name p,
+.spotlight-orientation p,
+.spotlight-media-count p{
+    flex: 1;
+    font-weight: 500;
+}
+
+.spotlight-media-details{
+    width: 98%;
+    padding: .5rem .5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    justify-content: space-between;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+.spotlight-media-details h1{
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(42, 42, 42, 0.1);
+}
+
+.spotlight-media-details .no-media-found{
+    width: 100%;
+    display: flex;
+}
+
+.spotlight-media-details .no-media-found img{
+    width: 100px;
+    height: 100px;
+}
+
+.spotlight-media-container.landscape{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.spotlight-media-wrapper.landscape{
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 1.5rem;
+    padding: .5rem .5rem;
+    width: 100%;
+    min-height: 25rem;
+    max-height: 25rem;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.10);
+    position: relative;
+    overflow: hidden;
+    color: black;
+}
+
+.spotlight-media-wrapper.landscape picture{
+    flex: .5;
+    border-radius: 10px;
+}
+
+.spotlight-media-wrapper.landscape picture img{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: fill;
+}
+
+
+.spotlight-media-wrapper.landscape picture video{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    object-fit: fill;
+    overflow-x: hidden;
+}
+
+.spotlight-media-contenet.landscape{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.spotlight-media-contenet.landscape .media-name,
+.spotlight-media-contenet.landscape .media-sequence,
+.spotlight-media-contenet.landscape .media-timing{
+    display: flex;
+}
+
+
+.spotlight-media-contenet.landscape .media-name h3,
+.spotlight-media-contenet.landscape .media-sequence h3,
+.spotlight-media-contenet.landscape .media-timing h3{
+    flex: .2;
+}
+
+.spotlight-media-contenet.landscape .media-name span,
+.spotlight-media-contenet.landscape .media-sequence span,
+.spotlight-media-contenet.landscape .media-timing span{
+    flex: .1;
+}
+
+.spotlight-media-contenet.landscape .media-name p,
+.spotlight-media-contenet.landscape .media-sequence p,
+.spotlight-media-contenet.landscape .media-timing p{
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .view-spotlight-header {
+        padding: 1rem 0rem;
+    }
+    
+    .view-spotlight-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .spotlight-setting {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .options {
+        right: -1rem;
+        min-width: 14rem;
+    }
+}
+
+
+
+.spotlight-delete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    backdrop-filter: blur(4px);
+    animation: overlayFadeIn 0.3s ease-out;
+}
+
+.spotlight-delete-popup {
+    border-radius: 1.2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: popupSlideIn 0.3s ease-out;
+    position: relative;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.delete-popup-header {
+    color: white;
+    padding: 2rem;
+    border-radius: 1.2rem 1.2rem 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    border-bottom: 1px solid white;
+}
+
+.delete-popup-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+}
+
+.delete-popup-content {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    color: #eeeeee;
+}
+
+.delete-popup-content p {
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+    font-size: 1.4rem;
+}
+
+.delete-popup-content .display-name {
+    color: #ee5a24;
+    font-size: 1.6rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    padding: 0.5rem 0;
+}
+
+.delete-popup-content .warning-text {
+    color: white;
+    font-style: italic;
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+}
+
+.delete-popup-actions {
+    padding: 1.5rem 2rem 2rem 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.cancel-btn, .confirm-delete-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 0.8rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    min-width: 120px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cancel-btn {
+    background: #f8f9fa;
+    color: #6c757d;
+    border: 2px solid #dee2e6;
+    font-size: 1.3rem;
+}
+
+.cancel-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 117, 125, 0.2);
+}
+
+.confirm-delete-btn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+    font-size: 1.3rem;
+}
+
+.confirm-delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    background: linear-gradient(135deg, #ff5252 0%, #d84315 100%);
+}
+
+.confirm-delete-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* Animations */
+@keyframes overlayFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popupSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* Focus states for accessibility */
+.close-btn:focus,
+.cancel-btn:focus,
+.confirm-delete-btn:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+/* Loading state for delete button */
+.confirm-delete-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.confirm-delete-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

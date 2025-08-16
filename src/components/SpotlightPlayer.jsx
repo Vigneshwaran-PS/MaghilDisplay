@@ -78,9 +78,9 @@ const SpotlightPlayer = () => {
         const mimeType = media?.mimeType.split('/')[1];
         
         return `${GCP_API.defaults.baseURL}/${mediaId}.${mimeType}`
-      }
+    }
 
-      const preloadImage = (url, index) => {
+    const preloadImage = (url, index) => {
         return new Promise((resolve, reject) => {
             const img = new Image();
             img.onload = () => {
