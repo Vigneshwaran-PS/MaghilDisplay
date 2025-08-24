@@ -33,7 +33,7 @@ const FullscreenMediaDisplay = ({
             ) : (
                 <div className="loading-overlay">
                     <div className="spinner-large"></div>
-                    <div>Loading...</div>
+                    <div className="loading-content">Loading...</div>
                 </div>
             )}
         </div>

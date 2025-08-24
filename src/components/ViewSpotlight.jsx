@@ -45,17 +45,29 @@ const ViewSpotlight = () => {
     }
   }, [])
 
-  const handleEdit = () => {
-    setShowOptions(false)
-    // Add your edit logic here
-    console.log('Edit clicked')
-    // navigate('/edit-spotlight')
+  const handleEdit = (display) => {
+    try{
+      setShowOptions(false)
+      if(display && display?.displayId){
+        const navigationState = {
+          displayId: display?.displayId,
+          isEdit: true
+        };
+        console.log("Navigating with state:", navigationState);
+        navigate(`/dashboard/modules/spotlight/config`, {
+          state: navigationState
+        });
+      }
+    }catch(error){
+      console.log("Error occurred while routing to spotlight edit screen",error)
+    }finally{
+      setShowOptions(false)
+    }
   }
 
   const handleDelete = (display) => {
     setShowOptions(false)
     if(display && display?.displayId){
-      console.log("Delete")
       setShowDeletePopUp({
         deletePopup: true,
         displayId: display?.displayId,
@@ -81,7 +93,7 @@ const ViewSpotlight = () => {
               : displayName
   }
 
-  // ✅ Cleaner version
+
   const getSpotLightMedias = () => {
     const medias = displayData?.spotLightDisplays?.[0]?.spotLightMedia;
     if (!medias || medias.length === 0) return null;
@@ -97,7 +109,7 @@ const ViewSpotlight = () => {
     const mimeType = media?.mimeType.split('/')[1];
     
     return `${GCP_API.defaults.baseURL}/${mediaId}.${mimeType}`
-}
+  }
 
   return (
     <div className='view-spotlight-container'>
@@ -112,7 +124,7 @@ const ViewSpotlight = () => {
               onClick={toggleOptions}
             />
             <div className={`options ${showOptions ? 'show' : ''}`}>
-              <button onClick={handleEdit}>
+              <button onClick={() => handleEdit(displayData?.spotLightDisplays?.[0])}>
                 Edit
               </button>
               <button onClick={() =>handleDelete(displayData?.spotLightDisplays?.[0])} className="delete-option">
