@@ -1,15 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { API } from "../api/api";
-import { useNavigate } from "react-router-dom";
 
 
 const mediaLibraryThunk = createAsyncThunk(
     "/dashboard/media-library",
-    async (locationId,{rejectWithValue}) => {
+    async (mediaRequest,{rejectWithValue}) => {
 
         try{
-            const response = await API.get(
-                `/api/v2/maghil-display/library?locationId=${locationId}`
+            const response = await API.post(
+                `/api/v2/maghil-display/library`,
+                mediaRequest
             );
             return response.data
         }catch(error){

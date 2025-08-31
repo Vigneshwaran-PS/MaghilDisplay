@@ -339,7 +339,7 @@
 .video-container-landscape .video-list-landscape{
     padding: 2rem 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(30rem,1fr));
+    grid-template-columns: repeat(auto-fill,minmax(33rem,1fr));
     row-gap: 3rem;
     column-gap: 2rem;
     margin-top: 1rem;
@@ -351,7 +351,7 @@
     backdrop-filter: blur(10px);
     border-radius: 1.5rem;
     padding: .5rem .5rem;
-    width: 30rem;
+    width: 33rem;
     height: 35rem;
     display: flex;
     flex-direction: column;
@@ -488,7 +488,7 @@
 .video-container-portrait .video-list-portrait {
     padding: 2rem 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(27rem, 1fr));
     row-gap: 3rem;
     column-gap: 2rem;
     margin-top: 1rem;
@@ -500,7 +500,7 @@
     backdrop-filter: blur(10px);
     border-radius: 1.5rem;
     padding: .5rem .5rem;
-    width: 25rem;
+    width: 27rem;
     min-height: 50rem;
     max-height: 60rem;
     display: flex;

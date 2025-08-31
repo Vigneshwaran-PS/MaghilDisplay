@@ -4,8 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/ViewSpotlight.css'
 import options from '../assets/icons/settings1.png'
 import noMediaFound from '../assets/icons/NoImageFound.png'
-import { spotLightMediasThunk } from '../thunks/SpotLightThunk';
+import { deleteSpotLightThunk, spotLightMediasThunk } from '../thunks/SpotLightThunk';
 import { GCP_API } from '../api/api';
+import { showErrorToast } from '../slices/ErrorToastSlice';
+import * as Colors from '../constants/Colors';
 
 const ViewSpotlight = () => {
 
@@ -14,6 +16,7 @@ const ViewSpotlight = () => {
 
   const {displayId} = useParams();
   const {displayData} = useSelector(state => state?.spotlight)
+  const locationId = useSelector(state => state?.slug?.data?.id)
   const [showOptions, setShowOptions] = useState(false)
   const [showDeletePopUp, setShowDeletePopUp] = useState(null)
   const optionsRef = useRef(null)
@@ -51,7 +54,9 @@ const ViewSpotlight = () => {
       if(display && display?.displayId){
         const navigationState = {
           displayId: display?.displayId,
-          isEdit: true
+          isEdit: true,
+          locationId,
+          templateId : displayData?.templateId
         };
         console.log("Navigating with state:", navigationState);
         navigate(`/dashboard/modules/spotlight/config`, {
@@ -81,9 +86,34 @@ const ViewSpotlight = () => {
   }
 
 
-  const confirmDelete = () => {
-    console.log('Deleting display:', showDeletePopUp?.displayId)
-    setShowDeletePopUp(null)
+  const confirmDelete = async() => {
+      try{
+          const response = await dispatch(deleteSpotLightThunk(displayId)).unwrap();
+          
+          if (response && response.error) {
+            dispatch(showErrorToast({
+              message: response.message || "Something went wrong while deleting spotlight, please try again later.",
+              backGroundColor: Colors.MAGHIL
+            }));
+            return;
+          }
+
+          dispatch(showErrorToast({
+            message: "Spotlight deleted successfully!",
+            backGroundColor: Colors.SUCCESS_GREEN
+          }));
+
+          navigate(`/dashboard/modules/spotlight/${locationId}/${displayData?.templateId}`);
+
+      }catch(error){
+        dispatch(showErrorToast({
+          message: "Something went wrong, please try again later.",
+          backGroundColor: Colors.MAGHIL
+        }));
+        console.log("Exception occured while deleting spotlight ",error)
+      }finally{
+        setShowDeletePopUp(null)
+      }
   }
 
 

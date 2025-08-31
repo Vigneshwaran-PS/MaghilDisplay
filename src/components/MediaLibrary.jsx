@@ -69,7 +69,10 @@ const MediaLibrary = () => {
     useEffect(() => {
         const locationId = data?.id
         if(locationId){
-            dispatch(mediaLibraryThunk(locationId));
+            dispatch(mediaLibraryThunk({
+                locationId,
+                orientation : ""
+            }));
         }
     },[data])
 

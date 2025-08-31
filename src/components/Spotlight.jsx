@@ -129,9 +129,23 @@ const Spotlight = () => {
 
     }
 
+    const navigateToCreateSpotlight = () => {
+        navigate('/dashboard/modules/spotlight/config', { 
+        state: { 
+            isEdit: false, 
+            locationId: selectedLocationId,
+            templateId
+        }});
+    }
 
   return (
     <div className='spotlight-container'>
+        <div className='add-new-spotlight' 
+             data-tooltip="Add new spotlight"
+             onClick={()=>navigateToCreateSpotlight()}
+        >
+            +
+        </div>
         <div className='spotlight-wrapper'>
             <div className="spotlight-header">
                 <h1>Spotlight</h1>            

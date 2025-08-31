@@ -12,7 +12,7 @@
     border-top-left-radius: .5rem;
     border-bottom-left-radius: .5rem;
     height: calc(100vh - 8rem);
-    z-index: 1000;
+    z-index: 10000;
     overlay: blax;
     overflow: hidden;
 }

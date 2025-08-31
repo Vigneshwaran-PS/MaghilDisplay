@@ -31,4 +31,35 @@ const spotLightMediasThunk = createAsyncThunk(
     }
 )
 
-export {spotLightThunk, spotLightMediasThunk}
+
+const saveSpotlightThunk = createAsyncThunk(
+    "/modules/save/spotlight",
+    async(spotlightData, {rejectWithValue}) => {
+        try{
+            const response = await API.post(
+                "/api/v2/maghil-display/save-spotlight",
+                spotlightData
+            )
+            return response.data;
+        }catch(error){
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
+
+const deleteSpotLightThunk = createAsyncThunk(
+    "/modules/remove/spotlight",
+    async(displayId, {rejectWithValue}) => {
+        try{
+            const response = await API.delete(
+                `/api/v2/maghil-display/remove-spotlight?displayId=${displayId}`
+            )
+            return response.data;
+        }catch(error){
+            return rejectWithValue(error.message)
+        }
+    }
+)
+
+export {spotLightThunk, spotLightMediasThunk, saveSpotlightThunk,deleteSpotLightThunk}
