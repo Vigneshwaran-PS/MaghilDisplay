@@ -1,8 +1,8 @@
-.login-container{
+.login-container {
     width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background: url('../assets/images/Login-background-2.jpg');
+    background: url('../assets/images/Login-background-1.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -12,9 +12,9 @@
 }
 
 .login-wrapper {
-    background: linear-gradient(135deg,rgba(255, 255, 255, 0.2),rgba(255, 255, 255, 0.05));
-    backdrop-filter: blur(.8rem) saturate(100%);
-    -webkit-backdrop-filter: blur(.8rem) saturate(100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    backdrop-filter: blur(0.8rem) saturate(100%);
+    -webkit-backdrop-filter: blur(0.8rem) saturate(100%);
     border-radius: 1.5rem;
     width: 40rem;
     max-width: 95%;
@@ -29,8 +29,7 @@
     gap: 1.2rem;
 }
 
-
-.maghil-logo{
+.maghil-logo {
     width: 100%;
     overflow: hidden;
     padding: 2rem;
@@ -39,7 +38,7 @@
     align-items: center;
 }
 
-.logo-and-maghil-text{
+.logo-and-maghil-text {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -48,27 +47,26 @@
     border-bottom: 1px solid black;
 }
 
-.logo-and-maghil-text img{
+.logo-and-maghil-text img {
     width: 5rem;
     height: 5rem;
 }
 
-
-.logo-and-maghil-text h1{
+.logo-and-maghil-text h1 {
     flex: 1;
     font-size: 5.1rem;
     color: rgb(42, 40, 40);
     transform: translateZ(20px);
 }
 
-.maghil-slogon{
+.maghil-slogon {
     margin-top: 1rem;
     font-size: 1.4rem;
     color: black;
     font-weight: 500;
 }
 
-.login-fields{
+.login-fields {
     width: 95%;
     padding: 0 2rem;
     padding-bottom: 3rem;
@@ -81,26 +79,25 @@
 .login-business-name,
 .login-user-id,
 .login-user-password,
-.login-submit-button{
+.login-submit-button {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: .3rem;
+    gap: 0.3rem;
     font-size: 1.5rem;
     color: black;
 }
 
-
 .login-business-name label,
 .login-user-id label,
 .login-user-password label,
-.login-submit-button label{
+.login-submit-button label {
     font-weight: 600;
 }
 
 .login-business-name input,
 .login-user-id input,
-.login-user-password input{
+.login-user-password input {
     width: 100%;
     padding: 1rem 1.5rem;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -112,32 +109,29 @@
     transform: translateZ(0);
 }
 
-.login-user-password input{
+.login-user-password input {
     padding-right: 4rem;
 }
-
 
 .login-business-name input:-webkit-autofill,
 .login-user-id input:-webkit-autofill,
 .login-user-password input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.1) inset !important;
-    -webkit-text-fill-color: black !important; 
-    caret-color: black !important; 
+    -webkit-text-fill-color: black !important;
+    caret-color: black !important;
     transition: background-color 5000s ease-in-out 0s;
 }
 
-
-
 .login-business-name input:focus,
 .login-user-id input:focus,
-.login-user-password input:focus{
+.login-user-password input:focus {
     outline: none;
     border-color: var(--maghil);
     box-shadow: 0 0 0 2px rgba(229, 35, 51, 0.2);
-    transform: translateZ(.5rem);
+    transform: translateZ(0.5rem);
 }
 
-.login-submit-button button{
+.login-submit-button button {
     background-color: var(--maghil);
     padding: 1.4rem 0;
     color: white;
@@ -156,7 +150,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     transition: 0.5s;
 }
 
@@ -170,7 +164,7 @@
     left: 100%;
 }
 
-.login-error-message{
+.login-error-message {
     color: rgb(247, 31, 31);
     font-size: 1.2rem;
     font-weight: 500;
@@ -182,9 +176,9 @@
     overflow: hidden;
 }
 
-.login-user-password .password-eye{
+.login-user-password .password-eye {
     position: absolute;
-    right: .5rem;
+    right: 0.5rem;
     height: 100%;
     display: flex;
     align-items: center;
@@ -192,7 +186,7 @@
     z-index: 1000;
 }
 
-.password-eye picture{
+.password-eye picture {
     height: 3rem;
     width: 3rem;
     display: flex;
@@ -200,11 +194,503 @@
     justify-content: center;
 }
 
-.password-and-icon picture img{
+.password-and-icon picture img {
     width: 2rem;
     height: 2rem;
     object-fit: contain;
 }
 
+/* ====== MEDIA QUERIES ====== */
 
+/* Large TVs and Ultra-wide screens (60" TVs ~3840px+) */
+@media screen and (min-width: 2560px) {
+    .login-wrapper {
+        width: 50rem;
+        padding: 3rem;
+        gap: 2rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 6rem;
+    }
+    
+    .maghil-slogon {
+        font-size: 1.8rem;
+    }
+    
+    .login-business-name,
+    .login-user-id,
+    .login-user-password,
+    .login-submit-button {
+        font-size: 1.8rem;
+    }
+    
+    .login-business-name input,
+    .login-user-id input,
+    .login-user-password input {
+        font-size: 1.6rem;
+        padding: 1.2rem 1.8rem;
+    }
+    
+    .login-submit-button button {
+        font-size: 2rem;
+        padding: 1.6rem 0;
+    }
+}
 
+/* Large Desktop Monitors (1920px - 2559px) */
+@media screen and (max-width: 2559px) and (min-width: 1440px) {
+    .login-wrapper {
+        width: 45rem;
+        padding: 2.5rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 5.5rem;
+    }
+    
+    .maghil-slogon {
+        font-size: 1.6rem;
+    }
+}
+
+/* Standard Desktop (1200px - 1439px) */
+@media screen and (max-width: 1439px) and (min-width: 1200px) {
+    .login-wrapper {
+        width: 42rem;
+        padding: 2.2rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 5.2rem;
+    }
+}
+
+/* Small Desktop/Large Laptop (1024px - 1199px) */
+@media screen and (max-width: 1199px) and (min-width: 1024px) {
+    .login-wrapper {
+        width: 38rem;
+        padding: 2rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 4.8rem;
+    }
+    
+    .maghil-logo {
+        padding: 1.8rem;
+    }
+}
+
+/* Landscape Tablets and Small Laptops (768px - 1023px) */
+@media screen and (max-width: 1023px) and (min-width: 768px) {
+    .login-wrapper {
+        width: 35rem;
+        padding: 1.8rem;
+        gap: 1rem;
+    }
+    
+    .maghil-logo {
+        padding: 1.5rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 4.2rem;
+    }
+    
+    .logo-and-maghil-text img {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+    
+    .maghil-slogon {
+        font-size: 1.3rem;
+    }
+    
+    .login-fields {
+        padding: 0 1.5rem;
+        padding-bottom: 2.5rem;
+        gap: 1.8rem;
+    }
+    
+    .login-business-name,
+    .login-user-id,
+    .login-user-password,
+    .login-submit-button {
+        font-size: 1.4rem;
+    }
+    
+    .login-business-name input,
+    .login-user-id input,
+    .login-user-password input {
+        font-size: 1.3rem;
+        padding: 0.9rem 1.3rem;
+    }
+    
+    .login-user-password input {
+        padding-right: 3.5rem;
+    }
+    
+    .login-submit-button button {
+        font-size: 1.6rem;
+        padding: 1.2rem 0;
+        margin-top: 1.5rem;
+    }
+    
+    .password-eye picture {
+        height: 2.8rem;
+        width: 2.8rem;
+    }
+    
+    .password-and-icon picture img {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+}
+
+/* Portrait Tablets and Large Mobile (481px - 767px) */
+@media screen and (max-width: 767px) and (min-width: 481px) {
+    .login-wrapper {
+        width: 32rem;
+        max-width: 90%;
+        padding: 1.5rem;
+        gap: 0.8rem;
+        border-radius: 1.2rem;
+    }
+    
+    .maghil-logo {
+        padding: 1.2rem;
+    }
+    
+    .logo-and-maghil-text {
+        gap: 0.8rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 3.8rem;
+    }
+    
+    .logo-and-maghil-text img {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .maghil-slogon {
+        font-size: 1.2rem;
+        margin-top: 0.8rem;
+    }
+    
+    .login-fields {
+        padding: 0 1rem;
+        padding-bottom: 2rem;
+        gap: 1.5rem;
+    }
+    
+    .login-business-name,
+    .login-user-id,
+    .login-user-password,
+    .login-submit-button {
+        font-size: 1.3rem;
+    }
+    
+    .login-business-name input,
+    .login-user-id input,
+    .login-user-password input {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.2rem;
+        border-radius: 0.8rem;
+    }
+    
+    .login-user-password input {
+        padding-right: 3.2rem;
+    }
+    
+    .login-submit-button button {
+        font-size: 1.5rem;
+        padding: 1.1rem 0;
+        margin-top: 1.2rem;
+        border-radius: 0.8rem;
+    }
+    
+    .password-eye picture {
+        height: 2.5rem;
+        width: 2.5rem;
+    }
+    
+    .password-and-icon picture img {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+    
+    .login-error-message {
+        font-size: 1.1rem;
+    }
+}
+
+/* Large Mobile (376px - 480px) */
+@media screen and (max-width: 480px) and (min-width: 376px) {
+    .login-wrapper {
+        width: 100%;
+        max-width: 85%;
+        padding: 1.2rem;
+        gap: 0.6rem;
+        border-radius: 1rem;
+    }
+    
+    .maghil-logo {
+        padding: 1rem;
+    }
+    
+    .logo-and-maghil-text {
+        gap: 0.6rem;
+        flex-direction: column;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 3.2rem;
+    }
+    
+    .logo-and-maghil-text img {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+    
+    .maghil-slogon {
+        font-size: 1.1rem;
+        margin-top: 0.6rem;
+    }
+    
+    .login-fields {
+        padding: 0 0.8rem;
+        padding-bottom: 1.5rem;
+        gap: 1.2rem;
+    }
+    
+    .login-business-name,
+    .login-user-id,
+    .login-user-password,
+    .login-submit-button {
+        font-size: 1.2rem;
+    }
+    
+    .login-business-name input,
+    .login-user-id input,
+    .login-user-password input {
+        font-size: 1.1rem;
+        padding: 0.7rem 1rem;
+        border-radius: 0.7rem;
+    }
+    
+    .login-user-password input {
+        padding-right: 2.8rem;
+    }
+    
+    .login-submit-button button {
+        font-size: 1.4rem;
+        padding: 1rem 0;
+        margin-top: 1rem;
+        border-radius: 0.7rem;
+    }
+    
+    .password-eye {
+        right: 0.3rem;
+    }
+    
+    .password-eye picture {
+        height: 2.2rem;
+        width: 2.2rem;
+    }
+    
+    .password-and-icon picture img {
+        width: 1.4rem;
+        height: 1.4rem;
+    }
+}
+
+/* Small Mobile (320px - 375px) */
+@media screen and (max-width: 375px) {
+    .login-wrapper {
+        width: 100%;
+        max-width: 95%;
+        padding: 1rem;
+        gap: 0.5rem;
+        border-radius: 0.8rem;
+    }
+    
+    .maghil-logo {
+        padding: 0.8rem;
+    }
+    
+    .logo-and-maghil-text {
+        gap: 0.5rem;
+        flex-direction: column;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 2.8rem;
+    }
+    
+    .logo-and-maghil-text img {
+        width: 3rem;
+        height: 3rem;
+    }
+    
+    .maghil-slogon {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+    
+    .login-fields {
+        padding: 0 0.5rem;
+        padding-bottom: 1.2rem;
+        gap: 1rem;
+    }
+    
+    .login-business-name,
+    .login-user-id,
+    .login-user-password,
+    .login-submit-button {
+        font-size: 1.1rem;
+    }
+    
+    .login-business-name input,
+    .login-user-id input,
+    .login-user-password input {
+        font-size: 1rem;
+        padding: 0.6rem 0.8rem;
+        border-radius: 0.6rem;
+    }
+    
+    .login-user-password input {
+        padding-right: 2.5rem;
+    }
+    
+    .login-submit-button button {
+        font-size: 1.3rem;
+        padding: 0.9rem 0;
+        margin-top: 0.8rem;
+        border-radius: 0.6rem;
+    }
+    
+    .password-eye {
+        right: 0.2rem;
+    }
+    
+    .password-eye picture {
+        height: 2rem;
+        width: 2rem;
+    }
+    
+    .password-and-icon picture img {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+    
+    .login-error-message {
+        font-size: 1rem;
+    }
+}
+
+/* Extra Small Mobile (below 320px) */
+@media screen and (max-width: 319px) {
+    .login-wrapper {
+        width: 100%;
+        max-width: 98%;
+        padding: 0.8rem;
+        gap: 0.4rem;
+    }
+    
+    .maghil-logo {
+        padding: 0.6rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 2.4rem;
+    }
+    
+    .logo-and-maghil-text img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .maghil-slogon {
+        font-size: 0.9rem;
+    }
+    
+    .login-fields {
+        padding: 0 0.3rem;
+        padding-bottom: 1rem;
+        gap: 0.8rem;
+    }
+    
+    .login-business-name,
+    .login-user-id,
+    .login-user-password,
+    .login-submit-button {
+        font-size: 1rem;
+    }
+    
+    .login-business-name input,
+    .login-user-id input,
+    .login-user-password input {
+        font-size: 0.9rem;
+        padding: 0.5rem 0.6rem;
+    }
+    
+    .login-submit-button button {
+        font-size: 1.2rem;
+        padding: 0.8rem 0;
+    }
+    
+    .password-eye picture {
+        height: 1.8rem;
+        width: 1.8rem;
+    }
+    
+    .password-and-icon picture img {
+        width: 1rem;
+        height: 1rem;
+    }
+}
+
+/* Landscape Mobile Orientation */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+    .login-container {
+        padding: 1rem 0;
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+    
+    .login-wrapper {
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    
+    .maghil-logo {
+        padding: 0.8rem;
+    }
+    
+    .logo-and-maghil-text h1 {
+        font-size: 2.5rem;
+    }
+    
+    .login-fields {
+        gap: 1rem;
+        padding-bottom: 1.5rem;
+    }
+}
+
+/* Touch device hover adjustments */
+@media (hover: none) and (pointer: coarse) {
+    .login-submit-button button:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .login-submit-button button:active {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(229, 35, 51, 0.3);
+    }
+}

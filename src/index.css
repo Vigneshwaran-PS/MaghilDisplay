@@ -2,21 +2,88 @@
     --maghil: #e52333;
 }
 
-
 html, body, #root{
     font-family: 'Poppins', sans-serif;
-    font-size: 63.5%;
+    font-size: 62.5%; 
     scroll-behavior: smooth;
     overflow-x: hidden;
 }
 
+*{     
+    margin: 0;     
+    padding: 0;     
+    box-sizing: border-box;     
+    outline: none;     
+    border: none;     
+    transition: all .2s linear;     
+    text-decoration: none; 
+}
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    outline: none;
-    border: none;
-    transition: all .2s linear;
-    text-decoration: none;
+/* ================================
+   MEDIA QUERIES
+================================ */
+
+/* Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+    html, body, #root {
+        font-size: 55%; 
+    }
+}
+
+/* Large Mobile Devices (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    html, body, #root {
+        font-size: 58%;
+    }
+}
+
+/* Tablets Portrait (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    html, body, #root {
+        font-size: 60%;
+    }
+}
+
+/* Tablets Landscape & Small Laptops (1025px - 1366px) */
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+    html, body, #root {
+        font-size: 62.5%; 
+    }
+}
+
+/* Desktop & Large Laptops (1367px - 1920px) */
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+    html, body, #root {
+        font-size: 65%;
+    }
+}
+
+/* Large Monitors (1921px - 2560px) */
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+    html, body, #root {
+        font-size: 68%;
+    }
+}
+
+/* Extra Large Monitors & TVs 50"+ (2561px and above) */
+@media screen and (min-width: 2561px) {
+    html, body, #root {
+        font-size: 75%;
+    }
+}
+
+/* High DPI Displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+    html, body, #root {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Landscape Orientation for Mobile/Tablet */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    html, body, #root {
+        font-size: 58%;
+    }
 }
