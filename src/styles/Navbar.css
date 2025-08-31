@@ -471,7 +471,7 @@
         top: 110%;
         width: 42rem;
         max-width: 48rem;
-        height: calc(100vh - 13rem); /* Matches dashboard padding */
+        height: calc(100vh - 10rem); /* Matches dashboard padding */
         padding: 1.5rem;
         font-size: 1.5rem;
         border-top-left-radius: 10px;
