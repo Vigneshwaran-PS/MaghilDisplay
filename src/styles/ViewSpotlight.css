@@ -11,7 +11,7 @@
 .view-spotlight-header{
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
-    border-radius: 1.2rem;
+    border-radius: 12px;
     padding: 2rem 2.5rem;
     margin-bottom: 2rem;
     display: flex;
@@ -43,7 +43,6 @@
     border: 2px solid transparent;
     will-change: transform;
 }
-
 
 .spotlight-setting.rotate-open {
     transform: rotate(90deg) scale(1.15);
@@ -103,7 +102,6 @@
     animation: dropdownSlideIn 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 
-
 .options button::before {
     content: '';
     position: absolute;
@@ -118,7 +116,6 @@
     left: 100%;
 }
 
-
 .options button.delete-option::before {
     background: linear-gradient(90deg, transparent, rgba(138, 138, 138, 0.1), transparent);
 }
@@ -126,7 +123,6 @@
 .options button:hover {
     padding-left: 2rem;
 }
-
 
 @keyframes smoothSpinOpen {
     0% {
@@ -178,7 +174,6 @@
     animation: smoothSpinClose 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-
 @keyframes dropdownSlideIn {
     0% {
         opacity: 0;
@@ -209,7 +204,6 @@
     }
 }
 
-
 .spotlight-view-content{
     width: 100%;
     margin-top: 3rem;
@@ -218,7 +212,6 @@
     align-items: center;
     gap: 2rem;
 }
-
 
 .spotlight-display-details{
     width: 98%;
@@ -229,7 +222,7 @@
     padding-bottom: 20px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
-    border-radius: 1.2rem;
+    border-radius: 12px;
     padding: 2rem 2.5rem;
     margin-bottom: 2rem;
     position: relative;
@@ -245,7 +238,6 @@
     align-items: center;
 }
 
-
 .spotlight-name h3,
 .spotlight-orientation h3,
 .spotlight-media-count h3{
@@ -259,7 +251,6 @@
     font-weight: 600;
 }
 
-
 .spotlight-name p,
 .spotlight-orientation p,
 .spotlight-media-count p{
@@ -272,7 +263,7 @@
     padding: .5rem .5rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border: none;
-    border-radius: 1.2rem;
+    border-radius: 12px;
     padding: 2rem 2.5rem;
     margin-bottom: 2rem;
     justify-content: space-between;
@@ -306,7 +297,7 @@
 .spotlight-media-wrapper.landscape{
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border-radius: 1.5rem;
+    border-radius: 15px;
     padding: .5rem .5rem;
     width: 100%;
     min-height: 25rem;
@@ -334,7 +325,6 @@
     object-fit: fill;
 }
 
-
 .spotlight-media-wrapper.landscape picture video{
     width: 100%;
     height: 100%;
@@ -356,7 +346,6 @@
     display: flex;
 }
 
-
 .spotlight-media-contenet.landscape .media-name h3,
 .spotlight-media-contenet.landscape .media-sequence h3,
 .spotlight-media-contenet.landscape .media-timing h3{
@@ -375,28 +364,6 @@
     flex: 1;
 }
 
-@media (max-width: 768px) {
-    .view-spotlight-header {
-        padding: 1rem 0rem;
-    }
-    
-    .view-spotlight-header h1 {
-        font-size: 1.5rem;
-    }
-    
-    .spotlight-setting {
-        width: 4rem;
-        height: 4rem;
-    }
-    
-    .options {
-        right: -1rem;
-        min-width: 14rem;
-    }
-}
-
-
-
 .spotlight-delete-overlay {
     position: fixed;
     top: 0;
@@ -413,7 +380,7 @@
 }
 
 .spotlight-delete-popup {
-    border-radius: 1.2rem;
+    border-radius: 12px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     max-width: 500px;
     width: 90%;
@@ -429,7 +396,7 @@
 .delete-popup-header {
     color: white;
     padding: 2rem;
-    border-radius: 1.2rem 1.2rem 0 0;
+    border-radius: 12px 12px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -507,7 +474,7 @@
 .cancel-btn, .confirm-delete-btn {
     padding: 1rem 2rem;
     border: none;
-    border-radius: 0.8rem;
+    border-radius: 8px;
     font-size: 1.1rem;
     font-weight: 600;
     cursor: pointer;
@@ -571,7 +538,6 @@
     }
 }
 
-
 /* Focus states for accessibility */
 .close-btn:focus,
 .cancel-btn:focus,
@@ -605,7 +571,6 @@
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-
 /* Portrait Orientation Styles */
 .spotlight-media-container.portrait {
     margin-top: 50px;
@@ -617,11 +582,11 @@
 .spotlight-media-wrapper.portrait {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border-radius: 1.5rem;
+    border-radius: 15px;
     padding: 1rem;
     width: 100%;
     width: 27rem;
-    height: 70remx;
+    height: 70rem;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -715,4 +680,891 @@
     background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
     background-size: 400% 400%;
     animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ================================
+   MEDIA QUERIES
+================================ */
+
+/* Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+    .view-spotlight-header {
+        padding: 1.2rem 1.5rem;
+        flex-direction: row;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .view-spotlight-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .spotlight-setting {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+    .options {
+        right: -1rem;
+        min-width: 12rem;
+    }
+
+    .options button {
+        font-size: 1.2rem;
+        padding: 8px 12px;
+    }
+
+    .spotlight-display-details,
+    .spotlight-media-details {
+        width: 100%;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .spotlight-name,
+    .spotlight-orientation,
+    .spotlight-media-count {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.5rem;
+        font-size: 1.3rem;
+    }
+
+    .spotlight-name h3,
+    .spotlight-orientation h3,
+    .spotlight-media-count h3 {
+        flex: none;
+    }
+
+    .spotlight-name span,
+    .spotlight-orientation span,
+    .spotlight-media-count span {
+        flex: none;
+    }
+
+    .spotlight-name p,
+    .spotlight-orientation p,
+    .spotlight-media-count p {
+        flex: none;
+    }
+
+    .spotlight-media-container.landscape {
+        gap: 1.5rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        flex-direction: column;
+        min-height: auto;
+        max-height: none;
+        gap: 15px;
+        padding: 1rem;
+    }
+
+    .spotlight-media-wrapper.landscape picture {
+        flex: none;
+        height: 25rem;
+    }
+
+    .spotlight-media-contenet.landscape {
+        flex: none;
+        gap: 1rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name,
+    .spotlight-media-contenet.landscape .media-sequence,
+    .spotlight-media-contenet.landscape .media-timing {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.3rem;
+        font-size: 1.3rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name h3,
+    .spotlight-media-contenet.landscape .media-sequence h3,
+    .spotlight-media-contenet.landscape .media-timing h3 {
+        flex: none;
+        font-size: 1.4rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name span,
+    .spotlight-media-contenet.landscape .media-sequence span,
+    .spotlight-media-contenet.landscape .media-timing span {
+        flex: none;
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
+    .spotlight-media-contenet.landscape .media-name p,
+    .spotlight-media-contenet.landscape .media-sequence p,
+    .spotlight-media-contenet.landscape .media-timing p {
+        flex: none;
+        font-size: 1.3rem;
+        white-space: nowrap;        
+        overflow: hidden;          
+        text-overflow: ellipsis;    
+        width: 70%;             
+        display: inline-block;
+        font-weight: 500;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 100%;
+        height: 50rem;
+    }
+
+    .spotlight-delete-popup {
+        width: 95%;
+        margin: 1rem;
+    }
+
+    .delete-popup-header {
+        padding: 1.5rem;
+    }
+
+    .delete-popup-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .delete-popup-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .delete-popup-actions {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}
+
+/* Large Mobile Devices (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .view-spotlight-header {
+        padding: 1.5rem 2rem;
+    }
+
+    .view-spotlight-header h1 {
+        font-size: 2rem;
+    }
+    
+    .spotlight-setting {
+        width: 5rem;
+        height: 5rem;
+    }
+    
+    .options {
+        right: -1rem;
+        min-width: 14rem;
+    }
+
+    .spotlight-display-details,
+    .spotlight-media-details {
+        width: 99%;
+        padding: 1.8rem 2rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+        min-height: 40rem;
+        max-height: 50rem;
+    }
+
+    .spotlight-media-contenet.landscape {
+        padding: 5px 10px;
+        gap: 1rem;
+    }
+
+    .spotlight-media-wrapper.landscape picture {
+        flex: none;
+        height: 25rem;
+    }
+
+    .spotlight-media-wrapper.landscape picture img{
+        flex: 1;
+        height: 25rem;
+        object-fit: cover;
+    }
+
+
+    .spotlight-media-contenet.landscape .media-name,
+    .spotlight-media-contenet.landscape .media-sequence,
+    .spotlight-media-contenet.landscape .media-timing {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name h3,
+    .spotlight-media-contenet.landscape .media-sequence h3,
+    .spotlight-media-contenet.landscape .media-timing h3 {
+        flex: none;
+        font-size: 1.8rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name span,
+    .spotlight-media-contenet.landscape .media-sequence span,
+    .spotlight-media-contenet.landscape .media-timing span {
+        flex: none;
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+
+    .spotlight-media-contenet.landscape .media-name p,
+    .spotlight-media-contenet.landscape .media-sequence p,
+    .spotlight-media-contenet.landscape .media-timing p {
+        flex: none;
+        font-size: 1.6rem;
+        white-space: nowrap;        
+        overflow: hidden;          
+        text-overflow: ellipsis;    
+        width: 70%;             
+        display: inline-block;
+        font-weight: 500;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 24rem;
+        height: 60rem;
+    }
+
+    .spotlight-delete-popup {
+        width: 85%;
+    }
+}
+
+/* Tablets Portrait (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .view-spotlight-header {
+        padding: 1.8rem 2.2rem;
+    }
+
+    .view-spotlight-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .spotlight-setting {
+        width: 5.5rem;
+        height: 5.5rem;
+    }
+
+    .options {
+        min-width: 15rem;
+    }
+
+    .spotlight-display-details,
+    .spotlight-media-details {
+        padding: 2rem 2.2rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        min-height: 27rem;
+        max-height: 35rem;
+        gap: 25px;
+    }
+
+
+    .spotlight-media-wrapper.landscape picture {
+        height: 100%;
+    }
+
+    .spotlight-media-wrapper.landscape picture img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .spotlight-media-contenet.landscape {
+        padding: 5px 10px;
+        gap: 1rem;
+        flex: 1;
+    }
+
+    .spotlight-media-contenet.landscape .media-name,
+    .spotlight-media-contenet.landscape .media-sequence,
+    .spotlight-media-contenet.landscape .media-timing {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name h3,
+    .spotlight-media-contenet.landscape .media-sequence h3,
+    .spotlight-media-contenet.landscape .media-timing h3 {
+        flex: none;
+        font-size: 1.8rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name span,
+    .spotlight-media-contenet.landscape .media-sequence span,
+    .spotlight-media-contenet.landscape .media-timing span {
+        flex: none;
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+
+    .spotlight-media-contenet.landscape .media-name p,
+    .spotlight-media-contenet.landscape .media-sequence p,
+    .spotlight-media-contenet.landscape .media-timing p {
+        flex: none;
+        font-size: 1.6rem;
+        white-space: nowrap;        
+        overflow: hidden;          
+        text-overflow: ellipsis;    
+        width: 70%;             
+        display: inline-block;
+        font-weight: 500;
+    }
+
+    .spotlight-media-wrapper.landscape picture {
+        flex: 1;
+        height: 25rem;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 25rem;
+        height: 65rem;
+    }
+
+    .spotlight-delete-popup {
+        max-width: 550px;
+        width: 80%;
+    }
+}
+
+/* Tablets Landscape & Small Laptops (1025px - 1366px) */
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+    .view-spotlight-header {
+        padding: 2rem 2.5rem;
+    }
+
+    .spotlight-setting {
+        width: 7rem;
+        height: 7rem;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(26rem, 1fr));
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 26rem;
+        height: 68rem;
+    }
+
+    .spotlight-delete-popup {
+        max-width: 500px;
+    }
+}
+
+/* Desktop & Large Laptops (1367px - 1920px) */
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+    .view-spotlight-header {
+        padding: 2.2rem 2.8rem;
+    }
+
+    .view-spotlight-header h1 {
+        font-size: 2.6rem;
+    }
+
+    .spotlight-setting {
+        width: 6.5rem;
+        height: 6.5rem;
+    }
+
+    .options {
+        min-width: 17rem;
+    }
+
+    .options button {
+        font-size: 1.6rem;
+        padding: 14px 18px;
+    }
+
+    .spotlight-display-details,
+    .spotlight-media-details {
+        padding: 2.2rem 2.8rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        min-height: 26rem;
+        max-height: 32rem;
+        gap: 35px;
+    }
+
+
+    .spotlight-media-contenet.landscape .media-name,
+    .spotlight-media-contenet.landscape .media-sequence,
+    .spotlight-media-contenet.landscape .media-timing {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name h3,
+    .spotlight-media-contenet.landscape .media-sequence h3,
+    .spotlight-media-contenet.landscape .media-timing h3 {
+        flex: none;
+        font-size: 1.8rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name span,
+    .spotlight-media-contenet.landscape .media-sequence span,
+    .spotlight-media-contenet.landscape .media-timing span {
+        flex: none;
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+
+    .spotlight-media-contenet.landscape .media-name p,
+    .spotlight-media-contenet.landscape .media-sequence p,
+    .spotlight-media-contenet.landscape .media-timing p {
+        flex: none;
+        font-size: 1.5rem;
+        white-space: nowrap;        
+        overflow: hidden;          
+        text-overflow: ellipsis;    
+        width: 70%;             
+        display: inline-block;
+        font-weight: 500;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(28rem, 1fr));
+        gap: 2.5rem;
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 28rem;
+        height: 72rem;
+    }
+
+    .spotlight-delete-popup {
+        max-width: 550px;
+    }
+
+    .delete-popup-header h2 {
+        font-size: 2rem;
+    }
+
+    .delete-popup-content p {
+        font-size: 1.5rem;
+    }
+
+    .delete-popup-content .display-name {
+        font-size: 1.7rem;
+    }
+
+    .cancel-btn, .confirm-delete-btn {
+        font-size: 1.4rem;
+        padding: 1.2rem 2.2rem;
+        min-width: 140px;
+    }
+}
+
+/* Large Monitors (1921px - 2560px) */
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+    .view-spotlight-header {
+        padding: 2.5rem 3rem;
+    }
+
+    .view-spotlight-header h1 {
+        font-size: 3rem;
+    }
+
+    .spotlight-setting {
+        width: 7rem;
+        height: 7rem;
+    }
+
+    .options {
+        min-width: 18rem;
+    }
+
+    .options button {
+        font-size: 1.7rem;
+        padding: 16px 20px;
+    }
+
+    .spotlight-display-details,
+    .spotlight-media-details {
+        padding: 2.5rem 3rem;
+    }
+
+    .spotlight-view-content {
+        margin-top: 3.5rem;
+        gap: 2.5rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        min-height: 28rem;
+        max-height: 35rem;
+        gap: 40px;
+        padding: 1rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name,
+    .spotlight-media-contenet.landscape .media-sequence,
+    .spotlight-media-contenet.landscape .media-timing {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.3rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name h3,
+    .spotlight-media-contenet.landscape .media-sequence h3,
+    .spotlight-media-contenet.landscape .media-timing h3 {
+        flex: none;
+        font-size: 2rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name span,
+    .spotlight-media-contenet.landscape .media-sequence span,
+    .spotlight-media-contenet.landscape .media-timing span {
+        flex: none;
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    .spotlight-media-contenet.landscape .media-name p,
+    .spotlight-media-contenet.landscape .media-sequence p,
+    .spotlight-media-contenet.landscape .media-timing p {
+        flex: none;
+        font-size: 2.5rem;
+        white-space: nowrap;        
+        overflow: hidden;          
+        text-overflow: ellipsis;    
+        width: 70%;             
+        display: inline-block;
+        font-weight: 500;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+        gap: 3rem;
+        margin-top: 60px;
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 30rem;
+        height: 75rem;
+        padding: 1.2rem;
+    }
+
+    .spotlight-media-contenet.portrait .media-name h3,
+    .spotlight-media-contenet.portrait .media-sequence h3,
+    .spotlight-media-contenet.portrait .media-timing h3 {
+        font-size: 1.5rem;
+    }
+
+    .spotlight-media-contenet.portrait .media-name p,
+    .spotlight-media-contenet.portrait .media-sequence p,
+    .spotlight-media-contenet.portrait .media-timing p {
+        font-size: 1.4rem;
+    }
+
+    .spotlight-delete-popup {
+        max-width: 600px;
+    }
+
+    .delete-popup-header {
+        padding: 2.5rem;
+    }
+
+    .delete-popup-header h2 {
+        font-size: 2.2rem;
+    }
+
+    .close-btn {
+        font-size: 3rem;
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .delete-popup-content {
+        padding: 3rem 2.5rem;
+    }
+
+    .delete-popup-content p {
+        font-size: 1.6rem;
+    }
+
+    .delete-popup-content .display-name {
+        font-size: 1.8rem;
+    }
+
+    .delete-popup-content .warning-text {
+        font-size: 1.4rem;
+    }
+
+    .cancel-btn, .confirm-delete-btn {
+        font-size: 1.5rem;
+        padding: 1.3rem 2.5rem;
+        min-width: 160px;
+    }
+}
+
+/* Extra Large Monitors & TVs 50"+ (2561px and above) */
+@media screen and (min-width: 2561px) {
+    .view-spotlight-header {
+        padding: 3rem 3.5rem;
+        border-radius: 15px;
+    }
+
+    .view-spotlight-header h1 {
+        font-size: 5rem;
+    }
+
+    .spotlight-setting {
+        width: 8rem;
+        height: 8rem;
+        padding: 10px;
+    }
+
+    .options {
+        min-width: 20rem;
+        border-radius: 8px;
+    }
+
+    .options button {
+        font-size: 3rem;
+        padding: 18px 22px;
+    }
+
+    .spotlight-display-details,
+    .spotlight-media-details {
+        padding: 3rem 3.5rem;
+        border-radius: 15px;
+    }
+
+    .spotlight-view-content {
+        margin-top: 4rem;
+        gap: 3rem;
+    }
+
+    .spotlight-name h3,
+    .spotlight-orientation h3,
+    .spotlight-media-count h3 {
+        font-size: 4rem;
+    }
+
+    .spotlight-name span,
+    .spotlight-orientation span,
+    .spotlight-media-count span {
+        font-size: 4rem;
+    }
+
+    .spotlight-name p,
+    .spotlight-orientation p,
+    .spotlight-media-count p {
+        font-size: 3.5rem;
+    }
+
+    .spotlight-media-details h1 {
+        font-size: 5rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        min-height: 45rem;
+        max-height: 60rem;
+        gap: 50px;
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    .spotlight-media-contenet.landscape .media-name h3,
+    .spotlight-media-contenet.landscape .media-sequence h3,
+    .spotlight-media-contenet.landscape .media-timing h3 {
+        font-size: 3rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name span,
+    .spotlight-media-contenet.landscape .media-sequence span,
+    .spotlight-media-contenet.landscape .media-timing span {
+        font-size: 3rem;
+    }
+
+    .spotlight-media-contenet.landscape .media-name p,
+    .spotlight-media-contenet.landscape .media-sequence p,
+    .spotlight-media-contenet.landscape .media-timing p {
+        font-size: 3rem;
+        font-weight: 500;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
+        gap: 3.5rem;
+        margin-top: 70px;
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 35rem;
+        height: 85rem;
+        padding: 1.5rem;
+        border-radius: 20px;
+    }
+
+    .spotlight-media-wrapper.portrait picture {
+        border-radius: 15px;
+    }
+
+    .spotlight-media-wrapper.portrait picture img,
+    .spotlight-media-wrapper.portrait picture video {
+        border-radius: 15px;
+    }
+
+    .spotlight-media-contenet.portrait {
+        padding: 1.5rem 0;
+        gap: 1.5rem;
+    }
+
+    .spotlight-media-contenet.portrait .media-name h3,
+    .spotlight-media-contenet.portrait .media-sequence h3,
+    .spotlight-media-contenet.portrait .media-timing h3 {
+        font-size: 3rem;
+    }
+
+    .spotlight-media-contenet.portrait .media-name span,
+    .spotlight-media-contenet.portrait .media-sequence span,
+    .spotlight-media-contenet.portrait .media-timing span {
+        font-size: 3rem;
+    }
+
+    .spotlight-media-contenet.portrait .media-name p,
+    .spotlight-media-contenet.portrait .media-sequence p,
+    .spotlight-media-contenet.portrait .media-timing p {
+        font-size: 3rem;
+        font-weight: 500;
+    }
+
+    .spotlight-delete-popup {
+        max-width: 700px;
+        border-radius: 15px;
+    }
+
+    .delete-popup-header {
+        padding: 3rem;
+        border-radius: 15px 15px 0 0;
+    }
+
+    .delete-popup-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .close-btn {
+        font-size: 3.5rem;
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .delete-popup-content {
+        padding: 3.5rem 3rem;
+    }
+
+    .delete-popup-content p {
+        font-size: 1.8rem;
+    }
+
+    .delete-popup-content .display-name {
+        font-size: 2rem;
+    }
+
+    .delete-popup-content .warning-text {
+        font-size: 1.6rem;
+    }
+
+    .delete-popup-actions {
+        padding: 2rem 3rem 3rem 3rem;
+    }
+
+    .cancel-btn, .confirm-delete-btn {
+        font-size: 1.7rem;
+        padding: 1.5rem 3rem;
+        min-width: 180px;
+        border-radius: 10px;
+    }
+}
+
+/* High DPI Displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+    .spotlight-setting,
+    .spotlight-media-wrapper.landscape picture img,
+    .spotlight-media-wrapper.landscape picture video,
+    .spotlight-media-wrapper.portrait picture img,
+    .spotlight-media-wrapper.portrait picture video {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}
+
+/* Landscape Orientation for Mobile/Tablet */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .view-spotlight-header {
+        padding: 1.2rem 2rem;
+    }
+
+    .view-spotlight-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .spotlight-setting {
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    .spotlight-display-details,
+    .spotlight-media-details {
+        padding: 1.5rem 2rem;
+    }
+
+    .spotlight-view-content {
+        margin-top: 2rem;
+        gap: 1.5rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        min-height: 20rem;
+        max-height: 25rem;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+    }
+
+    .spotlight-media-wrapper.portrait {
+        width: 22rem;
+        height: 55rem;
+    }
+}
+
+/* Ultra-wide Monitors (aspect ratio based) */
+@media screen and (min-aspect-ratio: 21/9) and (min-width: 1920px) {
+    .spotlight-media-container.landscape {
+        gap: 3rem;
+    }
+
+    .spotlight-media-wrapper.landscape {
+        gap: 50px;
+    }
+
+    .spotlight-media-container.portrait {
+        grid-template-columns: repeat(auto-fill, minmax(32rem, 1fr));
+        gap: 3.5rem;
+    }
 }
