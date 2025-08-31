@@ -177,10 +177,15 @@ const EditSpotlight = () => {
 
   // Handle input changes
   const handleDisplayNameChange = (e) => {
-    setEditDisplay(prev => ({
-      ...prev,
-      displayName: e.target.value
-    }));
+    const value = e.target.value;
+    
+    // Limit to 60 characters
+    if (value.length <= 60) {
+      setEditDisplay(prev => ({
+        ...prev,
+        displayName: value
+      }));
+    }
   };
 
   const handleOrientationChange = (e) => {
@@ -485,7 +490,8 @@ const EditSpotlight = () => {
                   value={editDisplay?.displayName || ''}
                   name='displayName'
                   onChange={handleDisplayNameChange}
-                  placeholder="Enter display name"
+                  placeholder="Enter display name (Max 60 characters)"
+                  maxLength={60}
                 />
               </div>
 
