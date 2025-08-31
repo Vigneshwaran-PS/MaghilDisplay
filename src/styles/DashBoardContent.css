@@ -1,7 +1,118 @@
 .dashboard-content-container{
     height: 100%;
-    padding: 8.5rem 5rem;
+    padding: 90px 5rem;
     overflow-x: hidden;
     overflow-y: auto;
 }
 
+/* ================================
+   MEDIA QUERIES
+================================ */
+
+/* Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+    .dashboard-content-container{
+        padding: 90px 1rem;
+        height: calc(100% - 2rem); /* Account for reduced padding */
+    }
+}
+
+/* Large Mobile Devices (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .dashboard-content-container{
+        padding: 90px 1.5rem;
+        height: calc(100% - 3rem);
+    }
+}
+
+/* Tablets Portrait (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .dashboard-content-container{
+        padding: 90px 2rem;
+        height: calc(100% - 4rem);
+    }
+}
+
+/* Tablets Landscape & Small Laptops (1025px - 1366px) */
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+    .dashboard-content-container{
+        padding: 100px 3rem;
+        height: calc(100% - 6rem);
+    }
+}
+
+/* Desktop & Large Laptops (1367px - 1920px) */
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+    .dashboard-content-container{
+        padding: 100px 4rem;
+        height: calc(100% - 7rem);
+    }
+}
+
+/* Large Monitors (1921px - 2560px) */
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+    .dashboard-content-container{
+        padding: 120px 5rem; /* Original size - optimal for large monitors */
+        height: calc(100% - 8.5rem);
+    }
+}
+
+/* Extra Large Monitors & TVs 50"+ (2561px and above) */
+@media screen and (min-width: 2561px) {
+    .dashboard-content-container{
+        padding: 150px 6rem;
+        height: calc(100% - 10rem);
+    }
+}
+
+/* Landscape Orientation for Mobile/Tablet */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .dashboard-content-container{
+        padding: 90px 2rem;
+        height: calc(100% - 1.5rem);
+    }
+}
+
+/* Very Small Mobile Devices (below 320px) */
+@media screen and (max-width: 319px) {
+    .dashboard-content-container{
+        padding: 1.5rem 0.8rem;
+        height: calc(100% - 1.5rem);
+    }
+}
+
+/* Ultra-wide screens (aspect ratio considerations) */
+@media screen and (min-aspect-ratio: 21/9) {
+    .dashboard-content-container{
+        padding-left: 8rem;
+        padding-right: 8rem;
+    }
+}
+
+/* Specific height considerations for short screens */
+@media screen and (max-height: 600px) {
+    .dashboard-content-container{
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+/* High DPI Displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+    .dashboard-content-container{
+        /* Enhanced scrolling for high DPI */
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .dashboard-content-container{
+        height: auto !important;
+        padding: 1rem !important;
+        overflow: visible !important;
+        page-break-inside: avoid;
+    }
+}

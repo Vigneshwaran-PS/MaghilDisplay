@@ -29,8 +29,8 @@
     transform: translateX(50%);
     background-color: #333;
     color: white;
-    padding: 8px 12px;
-    border-radius: 4px;
+    padding: 8px 12px; /* Fixed: padding in px */
+    border-radius: 4px; /* Fixed: rem to px */
     white-space: nowrap;
     font-size: 1rem;
     font-weight: bold;
@@ -46,7 +46,7 @@
     bottom: 110%;
     right: 50%;
     transform: translateX(50%);
-    border: 5px solid transparent;
+    border: 5px solid transparent; /* Fixed: border width in px */
     border-top-color: #333;
     opacity: 0;
     visibility: hidden;
@@ -77,7 +77,6 @@
     font-size: 2rem;
 }
 
-
 .spotlight-header h1{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     letter-spacing: .5px;
@@ -94,7 +93,6 @@
     gap: 1rem;
 }
 
-
 /* Landscape spotlights */
 .spotlight-root{
     position: relative;
@@ -109,7 +107,7 @@
 }
 
 .spotlight-root .spotlight-title h2{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid black; /* Fixed: border width in px */
     font-size: 2.5rem;
 }
 
@@ -124,21 +122,19 @@
     overflow-x: hidden;
 }
 
-
 .spotlight-card-wrapper{
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border-radius: 1.5rem;
+    border-radius: 15px; /* Fixed: rem to px */
     padding: .8rem .8rem;
     width: 40rem;
-    height: 14rem;
-    max-height: fit-content;
+    height: 16rem;
     display: flex;
     flex-direction: column;
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Fixed: border width in px */
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0.10); /* Fixed: blur value in px */
     position: relative;
     overflow: hidden;
     color: white;
@@ -155,9 +151,7 @@
     column-gap: .5rem;
 }
 
-
 /* Buttons */
-
 .spotlight-actions {
     width: 100%;
     overflow-x: hidden;
@@ -168,12 +162,12 @@
 
 .action-btn {
     flex: 1;
-    border-radius: 1rem;
+    border-radius: 10px; /* Fixed: rem to px */
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 8px; /* Fixed: gap in px */
     font-weight: 600;
     font-size: 1.2rem;
     transition: all 0.3s ease;
@@ -195,18 +189,15 @@
     height: 100%;
 }
 
-
 .play-btn {
     background: linear-gradient(45deg, #fdcb6e, #e17055);
     color: white;
 }
 
-
 .view-btn {
     background: linear-gradient(45deg, #fd79a8, #e84393);
     color: white;
 }
-
 
 .play-btn:disabled,
 .view-btn:disabled {
@@ -215,10 +206,7 @@
     box-shadow: none;
 }
 
-
-
 /* No Spotlight Found */
-
 .no-spotlight-found{
     width: 100%;
     margin-top: 10rem;
@@ -252,3 +240,701 @@
     font-size: 2rem;
     text-align: center;
 }
+
+/* ================================
+   MEDIA QUERIES
+================================ */
+
+/* Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+    .add-new-spotlight {
+        bottom: 20px;
+        right: 20px;
+        width: 4rem;
+        height: 4rem;
+        font-size: 2rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .add-new-spotlight::before {
+        padding: 6px 8px;
+        border-radius: 3px;
+        font-size: 0.9rem;
+        bottom: 130%;
+    }
+
+    .add-new-spotlight::after {
+        border: 4px solid transparent;
+        border-top-color: #333;
+        bottom: 120%;
+    }
+
+    /* Remove hover effects for touch devices */
+    .add-new-spotlight:hover::before,
+    .add-new-spotlight:hover::after {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .spotlight-wrapper{
+        gap: 0.8rem;
+        padding: 0 1rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 2.5rem;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .spotlight-root .spotlight-title h2{
+        font-size: 1.8rem;
+        padding: 0.5rem 0;
+    }
+
+    .spotlight-cards-container{
+        padding: 1rem 0.5rem;
+        grid-template-columns: 1fr;
+        row-gap: 1.5rem;
+        column-gap: 0;
+        margin-top: 0.5rem;
+    }
+
+    .spotlight-card-wrapper{
+        width: 100%;
+        height: auto;
+        min-height: 14rem;
+        padding: 1rem;
+        border-radius: 12px;
+        row-gap: 1rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .spotlight-card-wrapper h2{
+        font-size: 1.6rem;
+        line-height: 1.3;
+    }
+
+    .media-count{
+        font-size: 1.2rem;
+        column-gap: 0.3rem;
+    }
+
+    .media-count svg {
+        width: 14px;
+        height: 14px;
+    }
+
+    .spotlight-actions {
+        gap: 0.8rem;
+        flex-direction: column;
+    }
+
+    .action-btn {
+        padding: 0.8rem;
+        border-radius: 8px;
+        gap: 6px;
+        font-size: 1rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .action-btn p{
+        font-size: 1.3rem;
+    }
+
+    .play-icon{
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 5rem;
+        padding: 0 1rem;
+    }
+
+    .no-split-found-wrapper {
+        width: 10rem;
+        height: 10rem;
+    }
+
+    .no-split-found-container h4{
+        font-size: 1.5rem;
+    }
+}
+
+/* Large Mobile Devices (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .add-new-spotlight {
+        bottom: 25px;
+        right: 25px;
+        width: 4.5rem;
+        height: 4.5rem;
+        font-size: 2.2rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .add-new-spotlight::before {
+        padding: 7px 10px;
+        border-radius: 4px;
+        font-size: 0.95rem;
+    }
+
+    /* Remove hover effects for touch devices */
+    .add-new-spotlight:hover::before,
+    .add-new-spotlight:hover::after {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .spotlight-wrapper{
+        gap: 1rem;
+        padding: 0 1.5rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 3rem;
+    }
+
+    .spotlight-root .spotlight-title h2{
+        font-size: 2rem;
+    }
+
+    .spotlight-cards-container{
+        padding: 1.5rem 1rem;
+        grid-template-columns: 1fr;
+        row-gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .spotlight-card-wrapper{
+        width: 100%;
+        height: auto;
+        min-height: 14rem;
+        padding: 1.2rem;
+        border-radius: 13px;
+        row-gap: 1.2rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .spotlight-card-wrapper h2{
+        font-size: 1.8rem;
+    }
+
+    .media-count{
+        font-size: 1.3rem;
+        column-gap: 0.4rem;
+    }
+
+    .media-count svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .spotlight-actions {
+        gap: 1rem;
+    }
+
+    .action-btn {
+        padding: 1rem;
+        border-radius: 9px;
+        gap: 7px;
+        font-size: 1.1rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .action-btn p{
+        font-size: 1.4rem;
+    }
+
+    .play-icon{
+        width: 1.3rem;
+        height: 1.3rem;
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 7rem;
+        padding: 0 1.5rem;
+    }
+
+    .no-split-found-wrapper {
+        width: 12rem;
+        height: 12rem;
+    }
+
+    .no-split-found-container h4{
+        font-size: 1.7rem;
+    }
+}
+
+/* Tablets Portrait (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .add-new-spotlight {
+        bottom: 30px;
+        right: 30px;
+        width: 4.8rem;
+        height: 4.8rem;
+        font-size: 2.3rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    /* Remove hover effects for touch devices */
+    .add-new-spotlight:hover::before,
+    .add-new-spotlight:hover::after {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .spotlight-wrapper{
+        padding: 0 2rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 3.3rem;
+    }
+
+    .spotlight-root .spotlight-title h2{
+        font-size: 2.2rem;
+    }
+
+    .spotlight-cards-container{
+        padding: 1.8rem 1.2rem;
+        grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+        row-gap: 2.5rem;
+        column-gap: 1.5rem;
+    }
+
+    .spotlight-card-wrapper{
+        width: 100%;
+        height: auto;
+        min-height: 13.5rem;
+        padding: 1.5rem;
+        border-radius: 14px;
+        row-gap: 1.3rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .spotlight-card-wrapper h2{
+        font-size: 1.9rem;
+    }
+
+    .media-count{
+        font-size: 1.4rem;
+        column-gap: 0.45rem;
+    }
+
+    .action-btn {
+        padding: 1.1rem;
+        border-radius: 10px;
+        gap: 7px;
+        font-size: 1.15rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 8rem;
+        padding: 0 2rem;
+    }
+
+    .no-split-found-wrapper {
+        width: 13rem;
+        height: 13rem;
+    }
+
+    .no-split-found-container h4{
+        font-size: 1.8rem;
+    }
+}
+
+/* Tablets Landscape & Small Laptops (1025px - 1366px) */
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+    .add-new-spotlight {
+        bottom: 35px;
+        right: 35px;
+    }
+
+    .spotlight-wrapper{
+        padding: 0 2.5rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 3.5rem;
+    }
+
+    .spotlight-cards-container{
+        grid-template-columns: repeat(auto-fit, minmax(38rem, 1fr));
+        row-gap: 2.8rem;
+        column-gap: 1.8rem;
+    }
+
+    .spotlight-card-wrapper{
+        min-height: 14rem;
+        padding: 1.6rem;
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 9rem;
+        padding: 0 2.5rem;
+    }
+}
+
+/* Desktop & Large Laptops (1367px - 1920px) */
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+    .add-new-spotlight {
+        bottom: 40px;
+        right: 40px;
+        width: 5.2rem;
+        height: 5.2rem;
+        font-size: 2.6rem;
+    }
+
+    .spotlight-wrapper{
+        padding: 0 3rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 3.8rem;
+    }
+
+    .spotlight-root .spotlight-title h2{
+        font-size: 2.6rem;
+    }
+
+    .spotlight-cards-container{
+        padding: 2.2rem 1.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(40rem, 1fr));
+        row-gap: 3.2rem;
+        column-gap: 2.2rem;
+    }
+
+    .spotlight-card-wrapper{
+        height: 15rem;
+        padding: 1.8rem;
+        border-radius: 16px;
+        row-gap: 1.6rem;
+    }
+
+    .spotlight-card-wrapper h2{
+        font-size: 2.1rem;
+    }
+
+    .media-count{
+        font-size: 1.5rem;
+        column-gap: 0.5rem;
+    }
+
+    .action-btn {
+        padding: 1.2rem;
+        border-radius: 11px;
+        font-size: 1.25rem;
+    }
+
+    .action-btn p{
+        font-size: 1.6rem;
+    }
+
+    .play-icon{
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 10rem;
+        padding: 0 3rem;
+    }
+
+    .no-split-found-wrapper {
+        width: 15rem;
+        height: 15rem;
+    }
+
+    .no-split-found-container h4{
+        font-size: 2rem;
+    }
+}
+
+/* Large Monitors (1921px - 2560px) */
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+    .add-new-spotlight {
+        bottom: 45px;
+        right: 45px;
+        width: 5.5rem;
+        height: 5.5rem;
+        font-size: 2.8rem;
+    }
+
+    .spotlight-wrapper{
+        padding: 0 4rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 4.2rem;
+    }
+
+    .spotlight-root .spotlight-title h2{
+        font-size: 2.8rem;
+    }
+
+    .spotlight-cards-container{
+        padding: 2.5rem 2rem;
+        grid-template-columns: repeat(auto-fit, minmax(42rem, 1fr));
+        row-gap: 3.5rem;
+        column-gap: 2.5rem;
+    }
+
+    .spotlight-card-wrapper{
+        height: 16rem;
+        padding: 2rem;
+        border-radius: 18px;
+        row-gap: 1.8rem;
+    }
+
+    .spotlight-card-wrapper h2{
+        font-size: 2.3rem;
+    }
+
+    .media-count{
+        font-size: 1.6rem;
+        column-gap: 0.6rem;
+    }
+
+    .media-count svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .action-btn {
+        padding: 1.3rem;
+        border-radius: 12px;
+        font-size: 1.3rem;
+    }
+
+    .action-btn p{
+        font-size: 1.7rem;
+    }
+
+    .play-icon{
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 12rem;
+        padding: 0 4rem;
+    }
+
+    .no-split-found-wrapper {
+        width: 17rem;
+        height: 17rem;
+    }
+
+    .no-split-found-container h4{
+        font-size: 2.2rem;
+    }
+}
+
+/* Extra Large Monitors & TVs 50"+ (2561px and above) */
+@media screen and (min-width: 2561px) {
+    .add-new-spotlight {
+        bottom: 50px;
+        right: 50px;
+        width: 6rem;
+        height: 6rem;
+        font-size: 3rem;
+    }
+
+    .add-new-spotlight::before {
+        padding: 10px 15px;
+        border-radius: 5px;
+        font-size: 1.1rem;
+    }
+
+    .add-new-spotlight::after {
+        border: 6px solid transparent;
+        border-top-color: #333;
+    }
+
+    .spotlight-wrapper{
+        padding: 0 5rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 4.5rem;
+    }
+
+    .spotlight-root .spotlight-title h2{
+        font-size: 3rem;
+    }
+
+    .spotlight-cards-container{
+        padding: 3rem 2.5rem;
+        grid-template-columns: repeat(auto-fit, minmax(45rem, 1fr));
+        row-gap: 4rem;
+        column-gap: 3rem;
+    }
+
+    .spotlight-card-wrapper{
+        height: 20rem;
+        padding: 2.5rem;
+        border-radius: 20px;
+        row-gap: 2rem;
+    }
+
+    .spotlight-card-wrapper h2{
+        font-size: 2.5rem;
+    }
+
+    .media-count{
+        font-size: 1.8rem;
+        column-gap: 0.7rem;
+    }
+
+    .media-count svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .action-btn {
+        padding: 1.5rem;
+        border-radius: 15px;
+        font-size: 1.4rem;
+        gap: 10px;
+    }
+
+    .action-btn p{
+        font-size: 1.8rem;
+    }
+
+    .play-icon{
+        width: 1.8rem;
+        height: 1.8rem;
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 15rem;
+        padding: 0 5rem;
+    }
+
+    .no-split-found-wrapper {
+        width: 20rem;
+        height: 20rem;
+    }
+
+    .no-split-found-container h4{
+        font-size: 2.5rem;
+    }
+}
+
+/* Landscape Orientation for Mobile/Tablet */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .add-new-spotlight {
+        bottom: 15px;
+        right: 15px;
+        width: 4rem;
+        height: 4rem;
+        font-size: 2rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    /* Remove hover effects for touch devices */
+    .add-new-spotlight:hover::before,
+    .add-new-spotlight:hover::after {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    .spotlight-wrapper{
+        padding: 0 1rem;
+    }
+
+    .spotlight-header h1{
+        font-size: 2.5rem;
+    }
+
+    .spotlight-root .spotlight-title h2{
+        font-size: 1.8rem;
+    }
+
+    .spotlight-cards-container{
+        padding: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+        row-gap: 1.5rem;
+        column-gap: 1rem;
+    }
+
+    .spotlight-card-wrapper{
+        height: 11rem;
+        padding: 1rem;
+        border-radius: 10px;
+        row-gap: 0.8rem;
+        transition: none;
+    }
+
+    .spotlight-card-wrapper h2{
+        font-size: 1.5rem;
+    }
+
+    .media-count{
+        font-size: 1.1rem;
+    }
+
+    .media-count svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .action-btn {
+        padding: 0.8rem;
+        border-radius: 8px;
+        font-size: 1rem;
+        gap: 5px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .action-btn p{
+        font-size: 1.2rem;
+    }
+
+    .play-icon{
+        width: 1rem;
+        height: 1rem;
+    }
+
+    /* No spotlight found */
+    .no-spotlight-found{
+        margin-top: 3rem;
+    }
+
+    .no-split-found-wrapper {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    .no-split-found-container h4{
+        font-size: 1.3rem;
+    }
+}
+
+/* High DPI Displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+    .spotlight-card-wrapper{
+        backdrop-filter: blur(12px);
+    }
+
+    .spotlight-header h1,
+    .spotlight-root .spotlight-title h2,
+    .spotlight-card-wrapper h2,
+    .media-count,
+    .action-btn,
+    .no-split-found-container h4 {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+

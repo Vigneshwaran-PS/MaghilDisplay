@@ -1,3 +1,4 @@
+/* Base Styles */
 .navbar-container{
     position: absolute;
     top: 110%;
@@ -9,8 +10,8 @@
     color: white;
     padding: 1rem 1rem;
     font-size: 1.3rem;
-    border-top-left-radius: .5rem;
-    border-bottom-left-radius: .5rem;
+    border-top-left-radius: 5px; /* Fixed: rem to px */
+    border-bottom-left-radius: 5px; /* Fixed: rem to px */
     height: calc(100vh - 8rem);
     z-index: 10000;
     overlay: blax;
@@ -29,7 +30,7 @@
     font-size: 1.6rem;
     font-weight: 600;
     padding: .5rem;
-    border-bottom: 2px solid rgba(248, 248, 248, 0.1);
+    border-bottom: 2px solid rgba(248, 248, 248, 0.1); /* Fixed: border width in px */
     position: relative;
 }
 
@@ -50,7 +51,7 @@
 
 .navbar-wrapper .navbar-content .branches h5{
     font-size: 1.5rem;
-    border-bottom: 2px solid rgba(248, 248, 248, 0.1);
+    border-bottom: 2px solid rgba(248, 248, 248, 0.1); /* Fixed: border width in px */
 }
 
 .branches .branch{
@@ -58,7 +59,7 @@
     margin: 1.4rem .5rem;
     padding: .8rem .8rem;
     background: rgba(255, 255, 255, 0.09);
-    border-radius: .5rem;
+    border-radius: 5px; /* Fixed: rem to px */
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -80,7 +81,7 @@
 
 .navbar-wrapper .navbar-content .library h5{
     font-size: 1.5rem;
-    border-bottom: 2px solid rgba(248, 248, 248, 0.1);
+    border-bottom: 2px solid rgba(248, 248, 248, 0.1); /* Fixed: border width in px */
 }
 
 .library .media{
@@ -89,7 +90,7 @@
     align-items: center;
     gap: 1rem;
     background: rgba(255, 255, 255, 0.09) !important;
-    border-radius: .5rem;
+    border-radius: 5px; /* Fixed: rem to px */
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -120,17 +121,17 @@
 }
 
 .navbar-wrapper .logout{
-    position:absolute;
+    position: absolute;
     bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 92%;
     background-color: var(--maghil);
-    border-radius: .5rem;
+    border-radius: 5px; /* Fixed: rem to px */
     margin: 1.4rem .5rem;
     padding: .5rem .5rem;
-    border-radius: .5rem;
+    border-radius: 5px; /* Fixed: rem to px */
     color: white;
     cursor: pointer;
     transition: all 0.2s ease;
@@ -141,4 +142,511 @@
     color: white;
     font-size: 1.8rem;
     cursor: pointer;
+}
+
+/* ================================
+   MEDIA QUERIES
+================================ */
+
+/* Small Mobile Devices (320px - 480px) */
+@media screen and (max-width: 480px) {
+    .navbar-container{
+        width: 100%;
+        max-width: 100%;
+        right: 0;
+        top: 0;
+        height: calc(100vh - 2rem); /* Matches dashboard padding */
+        padding: 0.8rem;
+        font-size: 1.1rem;
+        border-radius: 0; /* No radius for full-width mobile */
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.3rem;
+        padding: 0.4rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        padding: 0.8rem 0;
+        font-size: 1.2rem;
+    }
+
+    .navbar-wrapper .navbar-content .branches h5,
+    .navbar-wrapper .navbar-content .library h5{
+        font-size: 1.2rem;
+        padding: 0.5rem 0;
+    }
+
+    .branches .branch{
+        font-size: 1.2rem;
+        margin: 1rem 0.3rem;
+        padding: 0.6rem;
+        border-radius: 4px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .branches .branch:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media{
+        margin: 1rem 0.3rem;
+        padding: 0.6rem;
+        border-radius: 4px;
+        gap: 0.8rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .library .media:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media picture{
+        width: 2.8rem;
+    }
+
+    .navbar-wrapper .logout{
+        width: 95%;
+        margin: 1rem 0.3rem;
+        padding: 0.6rem;
+        border-radius: 4px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .logout button{
+        font-size: 1.4rem;
+    }
+}
+
+/* Large Mobile Devices (481px - 768px) */
+@media screen and (min-width: 481px) and (max-width: 768px) {
+    .navbar-container{
+        width: 100%;
+        max-width: 100%;
+        right: 0;
+        top: 0;
+        height: calc(100vh - 3rem); /* Matches dashboard padding */
+        padding: 0.9rem;
+        font-size: 1.2rem;
+        border-radius: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.4rem;
+        padding: 0.5rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        padding: 0.9rem 0;
+        font-size: 1.3rem;
+    }
+
+    .navbar-wrapper .navbar-content .branches h5,
+    .navbar-wrapper .navbar-content .library h5{
+        font-size: 1.3rem;
+        padding: 0.6rem 0;
+    }
+
+    .branches .branch{
+        font-size: 1.3rem;
+        margin: 1.2rem 0.4rem;
+        padding: 0.7rem;
+        border-radius: 4px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .branches .branch:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media{
+        margin: 1.2rem 0.4rem;
+        padding: 0.7rem;
+        border-radius: 4px;
+        gap: 0.9rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .library .media:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media picture{
+        width: 3rem;
+    }
+
+    .navbar-wrapper .logout{
+        width: 94%;
+        margin: 1.2rem 0.4rem;
+        padding: 0.7rem;
+        border-radius: 4px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .logout button{
+        font-size: 1.5rem;
+    }
+}
+
+/* Tablets Portrait (769px - 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+    .navbar-container{
+        width: 40rem;
+        max-width: 45rem;
+        right: 0;
+        top: 110%;
+        height: calc(100vh - 4rem); /* Matches dashboard padding */
+        padding: 1rem;
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.5rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        font-size: 1.4rem;
+    }
+
+    .branches .branch{
+        font-size: 1.3rem;
+        border-radius: 5px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .branches .branch:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media{
+        border-radius: 5px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .library .media:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media picture{
+        width: 3.2rem;
+    }
+
+    .navbar-wrapper .logout{
+        border-radius: 5px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .logout button{
+        font-size: 1.6rem;
+    }
+}
+
+/* Tablets Landscape & Small Laptops (1025px - 1366px) */
+@media screen and (min-width: 1025px) and (max-width: 1366px) {
+    .navbar-container{
+        width: 38rem;
+        max-width: 42rem;
+        height: calc(100vh - 6rem); /* Matches dashboard padding */
+        border-top-left-radius: 6px;
+        border-bottom-left-radius: 6px;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.55rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        font-size: 1.45rem;
+    }
+
+    .branches .branch{
+        font-size: 1.35rem;
+    }
+
+    .library .media picture{
+        width: 3.3rem;
+    }
+
+    .logout button{
+        font-size: 1.7rem;
+    }
+}
+
+/* Desktop & Large Laptops (1367px - 1920px) */
+@media screen and (min-width: 1367px) and (max-width: 1920px) {
+    .navbar-container{
+        width: 36rem;
+        max-width: 40rem;
+        height: calc(100vh - 7rem); /* Matches dashboard padding */
+        border-top-left-radius: 7px;
+        border-bottom-left-radius: 7px;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.6rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        font-size: 1.5rem;
+    }
+
+    .branches .branch{
+        font-size: 1.4rem;
+        border-radius: 6px;
+    }
+
+    .library .media{
+        border-radius: 6px;
+    }
+
+    .library .media picture{
+        width: 3.4rem;
+    }
+
+    .navbar-wrapper .logout{
+        border-radius: 6px;
+    }
+
+    .logout button{
+        font-size: 1.75rem;
+    }
+}
+
+/* Large Monitors (1921px - 2560px) */
+@media screen and (min-width: 1921px) and (max-width: 2560px) {
+    .navbar-container{
+        width: 38rem;
+        max-width: 42rem;
+        height: calc(100vh - 8.5rem); /* Matches dashboard padding - original */
+        border-top-left-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.7rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        font-size: 1.6rem;
+    }
+
+    .navbar-wrapper .navbar-content .branches h5,
+    .navbar-wrapper .navbar-content .library h5{
+        font-size: 1.6rem;
+    }
+
+    .branches .branch{
+        font-size: 1.45rem;
+        border-radius: 7px;
+    }
+
+    .library .media{
+        border-radius: 7px;
+    }
+
+    .library .media picture{
+        width: 3.6rem;
+    }
+
+    .navbar-wrapper .logout{
+        border-radius: 7px;
+    }
+
+    .logout button{
+        font-size: 1.8rem;
+    }
+}
+
+/* Extra Large Monitors & TVs 50"+ (2561px and above) */
+@media screen and (min-width: 2561px) {
+    .navbar-container{
+        width: 42rem;
+        max-width: 48rem;
+        height: calc(100vh - 10rem); /* Matches dashboard padding */
+        padding: 1.5rem;
+        font-size: 1.5rem;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.9rem;
+        padding: 0.7rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        padding: 1.2rem 0;
+        font-size: 1.7rem;
+    }
+
+    .navbar-wrapper .navbar-content .branches h5,
+    .navbar-wrapper .navbar-content .library h5{
+        font-size: 1.7rem;
+        padding: 0.8rem 0;
+    }
+
+    .branches .branch{
+        font-size: 1.6rem;
+        margin: 1.6rem 0.6rem;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    .library .media{
+        margin: 1.6rem 0.6rem;
+        padding: 1rem;
+        border-radius: 8px;
+        gap: 1.2rem;
+    }
+
+    .library .media picture{
+        width: 4rem;
+    }
+
+    .navbar-wrapper .logout{
+        width: 90%;
+        margin: 1.6rem 0.6rem;
+        padding: 0.8rem;
+        border-radius: 8px;
+    }
+
+    .logout button{
+        font-size: 2rem;
+    }
+}
+
+/* Landscape Orientation for Mobile/Tablet */
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .navbar-container{
+        width: 50%;
+        max-width: 35rem;
+        right: 0;
+        top: 0;
+        height: calc(100vh - 1.5rem); /* Matches dashboard landscape padding */
+        padding: 0.5rem;
+        font-size: 1.1rem;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+    }
+
+    .navbar-wrapper h3{
+        font-size: 1.2rem;
+        padding: 0.3rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        padding: 0.5rem 0;
+        font-size: 1.1rem;
+    }
+
+    .navbar-wrapper .navbar-content .branches h5,
+    .navbar-wrapper .navbar-content .library h5{
+        font-size: 1.1rem;
+        padding: 0.3rem 0;
+    }
+
+    .branches .branch{
+        font-size: 1rem;
+        margin: 0.8rem 0.3rem;
+        padding: 0.5rem;
+        border-radius: 3px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .branches .branch:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media{
+        margin: 0.8rem 0.3rem;
+        padding: 0.5rem;
+        border-radius: 3px;
+        gap: 0.6rem;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .library .media:hover{
+        transform: none; /* Remove hover effect for touch devices */
+    }
+
+    .library .media picture{
+        width: 2.5rem;
+    }
+
+    .navbar-wrapper .logout{
+        width: 95%;
+        margin: 0.8rem 0.3rem;
+        padding: 0.4rem;
+        border-radius: 3px;
+        transition: none; /* Remove transition for touch devices */
+    }
+
+    .logout button{
+        font-size: 1.2rem;
+    }
+}
+
+/* Very Short Screens */
+@media screen and (max-height: 600px) {
+    .navbar-container{
+        height: calc(100vh - 2rem);
+        padding: 0.5rem;
+    }
+
+    .navbar-wrapper h3{
+        padding: 0.3rem;
+        font-size: 1.3rem;
+    }
+
+    .navbar-wrapper .navbar-content{
+        padding: 0.5rem 0;
+    }
+
+    .branches .branch{
+        margin: 0.8rem 0.4rem;
+        padding: 0.5rem;
+    }
+
+    .library .media{
+        margin: 0.8rem 0.4rem;
+        padding: 0.5rem;
+    }
+
+    .navbar-wrapper .logout{
+        margin: 0.8rem 0.4rem;
+        padding: 0.4rem;
+    }
+}
+
+/* High DPI Displays */
+@media screen and (-webkit-min-device-pixel-ratio: 2),
+       screen and (min-resolution: 192dpi) {
+    .navbar-container{
+        backdrop-filter: blur(12px);
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .navbar-wrapper h3,
+    .branches .branch,
+    .library .media,
+    .logout button {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    .navbar-wrapper .navbar-content{
+        scroll-behavior: smooth;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .navbar-container {
+        display: none !important;
+    }
 }
