@@ -706,7 +706,7 @@
 /* Add a subtle overlay hint on hover */
 .image-view-landscape::after,
 .image-view-portrait::after {
-    content: "🔍 Click to view fullscreen";
+    content: "Click to view fullscreen";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -721,6 +721,9 @@
     pointer-events: none;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-view-landscape:hover::after,
