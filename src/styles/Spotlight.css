@@ -610,7 +610,7 @@
     }
 
     .spotlight-card-wrapper{
-        height: 15rem;
+        height: 18rem;
         padding: 1.8rem;
         border-radius: 16px;
         row-gap: 1.6rem;
@@ -686,7 +686,7 @@
     }
 
     .spotlight-card-wrapper{
-        height: 16rem;
+        height: 19rem;
         padding: 2rem;
         border-radius: 18px;
         row-gap: 1.8rem;
@@ -838,7 +838,7 @@
         width: 4rem;
         height: 4rem;
         font-size: 2rem;
-        transition: none; /* Remove transition for touch devices */
+        transition: none;
     }
 
     /* Remove hover effects for touch devices */
@@ -868,7 +868,7 @@
     }
 
     .spotlight-card-wrapper{
-        height: 11rem;
+        height: 15rem;
         padding: 1rem;
         border-radius: 10px;
         row-gap: 0.8rem;
