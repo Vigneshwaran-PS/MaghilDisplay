@@ -655,13 +655,13 @@
     width: 100%;
     overflow-x: hidden;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 30fr));
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
     gap: 2rem;
 }
 
 /* Portrait media item layout */
 .edit-display-each-media.portrait {
-    width: 100%;
+    width: 30rem;
     height: 65rem;
     overflow: hidden;
     display: flex;
