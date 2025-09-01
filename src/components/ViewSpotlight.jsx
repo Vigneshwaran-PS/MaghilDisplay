@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 import '../styles/ViewSpotlight.css'
-import options from '../assets/icons/settings1.png'
+import options from '../assets/icons/Settings1.png'
 import noMediaFound from '../assets/icons/NoImageFound.png'
 import { deleteSpotLightThunk, spotLightMediasThunk } from '../thunks/SpotLightThunk';
 import { GCP_API } from '../api/api';
