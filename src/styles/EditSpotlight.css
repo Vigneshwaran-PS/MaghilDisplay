@@ -674,6 +674,10 @@
     position: relative;
     transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
     border: 2px solid transparent;
+    white-space: nowrap;        
+    overflow: hidden;          
+    text-overflow: ellipsis;    
+    width: 70%;             
 }
 
 .edit-display-each-media.portrait:hover {
@@ -883,6 +887,35 @@
         flex: none;
         gap: 1rem;
     }
+
+    .spotlight-media-content.landscape .edit-spotlight-media-name h3,
+    .spotlight-media-content.landscape .edit-spotlight-media-sequence h3,
+    .spotlight-media-content.landscape .edit-spotlight-media-timing h3{
+        font-size: 1.4rem;
+    }
+
+    .spotlight-media-content.landscape .edit-spotlight-media-name span,
+    .spotlight-media-content.landscape .edit-spotlight-media-sequence span,
+    .spotlight-media-content.landscape .edit-spotlight-media-timing sapn{
+        font-size: 1.4rem;
+    }
+
+    .spotlight-media-content.landscape .edit-spotlight-media-name p,
+    .spotlight-media-content.landscape .edit-spotlight-media-sequence p,
+    .spotlight-media-content.landscape .edit-spotlight-media-timing p{
+        font-size: 1.2rem;
+        white-space: nowrap;        
+        overflow: hidden;          
+        text-overflow: ellipsis;    
+        width: 70%;             
+        display: inline-block;
+    }
+
+    .spotlight-media-content.landscape .edit-spotlight-media-timing {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+    }
     
     .drag-handle {
         font-size: 1.6rem;
@@ -909,6 +942,7 @@
     
     /* Portrait layout for mobile */
     .edit-display-each-media.portrait {
+        width: 25rem;
         height: auto;
         min-height: 45rem;
     }
@@ -1063,9 +1097,46 @@
         width: 10rem;
         font-size: 1.3rem;
     }
+
+
+    .spotlight-media-content.landscape .edit-spotlight-media-name h3,
+    .spotlight-media-content.landscape .edit-spotlight-media-sequence h3,
+    .spotlight-media-content.landscape .edit-spotlight-media-timing h3{
+        font-size: 1.6rem;
+    }
+
+    .spotlight-media-content.landscape .edit-spotlight-media-name span,
+    .spotlight-media-content.landscape .edit-spotlight-media-sequence span,
+    .spotlight-media-content.landscape .edit-spotlight-media-timing sapn{
+        font-size: 1.6rem;
+    }
+
+    .spotlight-media-content.landscape .edit-spotlight-media-name p,
+    .spotlight-media-content.landscape .edit-spotlight-media-sequence p,
+    .spotlight-media-content.landscape .edit-spotlight-media-timing p{
+        font-size: 1.4rem;
+        white-space: nowrap;        
+        overflow: hidden;          
+        text-overflow: ellipsis;    
+        width: 70%;             
+        display: inline-block;
+    }
+
+    .spotlight-media-content.landscape .edit-spotlight-media-timing {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-items: center;
+    }
+
+
+    .spotlight-media-content.landscape .edit-spotlight-media-timing .edit-spotlight-display-time-in-sec{
+        width: 50%;
+    }
     
     /* Portrait layout adjustments */
     .edit-display-each-media.portrait {
+        width: 30rem;
         height: auto;
         min-height: 50rem;
     }
@@ -1169,6 +1240,7 @@
     /* Portrait adjustments for tablets */
     .edit-display-each-media.portrait {
         height: 60rem;
+        width: 30rem;
     }
     
     .edit-display-each-media.portrait picture {
@@ -1237,6 +1309,16 @@
         min-width: 100%;
         max-width: 100%;
     }
+
+     /* Portrait adjustments for tablets */
+     .edit-display-each-media.portrait {
+        height: 60rem;
+        width: 30rem;
+    }
+    
+    .edit-display-each-media.portrait picture {
+        height: 42rem;
+    }
     
     .edit-spotlight-media-timing {
         gap: 3.5rem;
@@ -1294,6 +1376,16 @@
     .edit-spotlight-cancel-btn,
     .edit-spotlight-save-btn {
         min-width: 30%;
+    }
+
+     /* Portrait adjustments for tablets */
+     .edit-display-each-media.portrait {
+        height: 60rem;
+        width: 30rem;
+    }
+    
+    .edit-display-each-media.portrait picture {
+        height: 42rem;
     }
 }
 
@@ -1354,6 +1446,16 @@
     .edit-display-medias-wrapper.landscape {
         grid-template-columns: 1fr;
         gap: 2.5rem;
+    }
+
+     /* Portrait adjustments for tablets */
+     .edit-display-each-media.portrait {
+        height: 60rem;
+        width: 30rem;
+    }
+    
+    .edit-display-each-media.portrait picture {
+        height: 42rem;
     }
     
     .edit-display-medias-wrapper.portrait {
