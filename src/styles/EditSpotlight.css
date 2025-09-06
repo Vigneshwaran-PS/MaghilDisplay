@@ -502,8 +502,7 @@
     width: 100%;
     overflow-x: hidden;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
-    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(35rem, 1fr));
     gap: 1.5rem;
 }
 
@@ -975,7 +974,7 @@
     }
     
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
     
     .edit-display-single-media.landscape {
@@ -1146,7 +1145,7 @@
     }
     
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
         gap: 2rem;
     }
     
@@ -1248,7 +1247,7 @@
     }
     
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
     
     .edit-display-single-media.landscape {
@@ -1298,7 +1297,7 @@
     
     /* Grid adjustments for landscape on tablets/small laptops */
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
     
     .edit-display-medias-wrapper.portrait {
@@ -1354,7 +1353,7 @@
     }
     
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
     }
     
     .edit-display-medias-wrapper.portrait {
@@ -1444,7 +1443,7 @@
     }
     
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
         gap: 2.5rem;
     }
 
@@ -1595,7 +1594,7 @@
     }
     
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: 1fr;
+        /* grid-template-columns: 1fr; */
         gap: 3rem;
     }
     
@@ -1835,7 +1834,7 @@
 /* Ultra-wide Monitors (Aspect Ratio > 21:9) */
 @media screen and (min-width: 2560px) and (min-aspect-ratio: 21/9) {
     .edit-display-medias-wrapper.landscape {
-        grid-template-columns: repeat(2, 1fr);
+        /* grid-template-columns: repeat(2, 1fr); */
         gap: 4rem;
     }
     
