@@ -30,7 +30,6 @@ const DashBoardContent = () => {
               {/* Menu */}
               <Route path='modules/menu/:locationId/:templateId' element={<MenuModule/>}/>
               <Route path='modules/menu/config' element={<AddEditMenuTemplate/>}/>
-              <Route path='modules/menu-template-preview' element={<MenuTemplatePreview/>}/>
             
             </Routes>
         </div>

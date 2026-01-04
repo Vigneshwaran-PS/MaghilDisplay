@@ -4,12 +4,12 @@ import { mediaLibraryThunk } from "../thunks/MediaLibraryThunk";
 import { useDispatch, useSelector } from "react-redux";
 import { showErrorToast } from "../slices/ErrorToastSlice";
 import * as Colors from "../constants/Colors";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import noMediaFound from "../assets/icons/NoImageFound.png";
 import Loader from "../components/Loader";
 import { GCP_API } from "../api/api";
 import { SketchPicker } from "react-color";
-import { menuThunk } from '../thunks/MenuThunk';
+import { menuThunk, saveMenuTemplateThunk } from '../thunks/MenuThunk';
 import MenuTemplatePreview from './MenuTemplatePreview';
 
 const AddEditMenuTemplate = () => {
@@ -418,14 +418,79 @@ const AddEditMenuTemplate = () => {
       );
       return;
     }
-
+  
     setIsSaving(true);
-    console.log('Saving:', {
-      ...menuTemplate,
-      selectedMedias: sortedMedias,
-      selectedMenuItems: Array.from(selectedMenuItems)
-    });
-    setIsSaving(false);
+  
+    try {
+      const payload = {
+        locationId: locationDetials?.id || "",
+        templateType: "MENU",
+        orientation: menuTemplate.orientation,
+        displayName: menuTemplate?.displayName,
+        spotLightMedia: sortedMedias.map(media => ({
+          sequenceNo: media.sequenceNo,
+          mediaId: media.mediaId,
+          name: media.name,
+          mimeType: media.mimeType || (media.mediaType?.toLowerCase() === 'video' ? 'video/mp4' : 'image/jpeg'),
+          displayTime: videoDurations[media.mediaId] || 10,
+        })),
+        menuTemplate: {
+          menuRefreshTimeInMins: menuTemplate.menuRefreshTimeInMins || "",
+          items: Array.from(selectedMenuItems), 
+          backGroundColor: menuTemplate.backgroundColor,
+          categoryCardBackgroundColor: menuTemplate.categoryCardBackgroundColor,
+          categoryTextColor: menuTemplate.categoryTextColor,
+          itemCardBackgroundColor: menuTemplate.itemCardBackgroundColor,
+          itemCardTextColor: menuTemplate.itemCardTextColor,
+          itemPriceTextColor: menuTemplate.itemPriceTextColor
+        }
+      };
+  
+      const response = await dispatch(saveMenuTemplateThunk(payload)).unwrap();
+      const isSuccess = response?.httpStatus === 200
+  
+      if (isSuccess) {
+        dispatch(
+          showErrorToast({
+            message: response.message || "Menu template saved successfully!",
+            backGroundColor: Colors.SUCCESS_GREEN,
+          })
+        );
+        
+        const route = "/dashboard/modules/menu"
+        navigate(`${route}/${routerLocation?.state?.locationId}/${routerLocation?.state?.templateId}`);    
+        return;
+      }
+  
+      dispatch(
+        showErrorToast({
+          message: response.message || "Failed to save menu template. Please try again.",
+          backGroundColor: Colors.MAGHIL,
+        })
+      );
+  
+    } catch (error) {
+      let errorMessage = "Something went wrong, please try again later.";
+      
+      if (error.response) {
+        errorMessage = error.response.data?.message || 
+                       error.response.data?.error || 
+                       `Error: ${error.response.status}`;
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+  
+      dispatch(
+        showErrorToast({
+          message: errorMessage,
+          backGroundColor: Colors.MAGHIL,
+        })
+      );
+      console.error("Error saving menu template:", error);
+      
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const isFormValid = () => {
