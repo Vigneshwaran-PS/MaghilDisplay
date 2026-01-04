@@ -31,17 +31,30 @@
 
 /* ================================ CONFIGURATION SECTIONS ================================ */
 
+.menu-template-config-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
 .menu-template-configuration,
 .menu-template-color-configuration {
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 12px;
     padding: 2rem 2.5rem;
-    margin-bottom: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-template-color-configuration {
+    gap: 1rem;
 }
 
 .menu-template-config-header,
@@ -125,55 +138,91 @@
 
 .menu-template-config-color {
     width: 100%;
-    padding: 5px 10px;
+    padding: 1rem 1.5rem;
     display: flex;
     flex-direction: row;
-    gap: 2rem;
+    justify-content: space-between;
     align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    margin-bottom: 0.8rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-template-config-color:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateX(5px);
 }
 
 .menu-template-config-color h4 {
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     color: white;
-    min-width: 200px;
+    font-weight: 500;
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
 }
 
 .color-picker-wrapper {
     position: relative;
-    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .color-preview {
-    width: 15%;
-    min-width: 150px;
-    max-width: 500px;
-    height: 45px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
-    border-radius: 8px;
+    min-width: 180px;
+    width: auto;
+    height: 50px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25), inset 0 2px 4px rgba(255, 255, 255, 0.1);
     position: relative;
+    overflow: hidden;
+}
+
+.color-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
 }
 
 .color-preview:hover {
-    border-color: rgba(255, 255, 255, 0.6);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
-    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35), inset 0 2px 4px rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px) scale(1.02);
+}
+
+.color-preview:active {
+    transform: translateY(0) scale(0.98);
 }
 
 .color-preview span {
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 1px;
-    padding: 5px 15px;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.5);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 1.2px;
+    padding: 8px 18px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
     color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1;
+    position: relative;
+    font-family: 'Courier New', monospace;
 }
 
 .color-picker-overlay {
@@ -195,6 +244,7 @@
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -215,6 +265,7 @@
         transform: translateY(30px);
         opacity: 0;
     }
+
     to {
         transform: translateY(0);
         opacity: 1;
@@ -944,11 +995,42 @@
         font-size: 2.2rem;
     }
 
+    .menu-template-config-wrapper {
+        flex-direction: column;
+    }
+
+    .menu-template-configuration,
+    .menu-template-color-configuration {
+        width: 100%;
+    }
+
     .menu-template-config-header,
     .menu-template-color-config-header,
     .menu-template-medias-header,
     .menu-template-menu-header {
         font-size: 1.8rem;
+    }
+
+    .menu-template-config-color {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.2rem;
+    }
+
+    .menu-template-config-color h4 {
+        font-size: 1.4rem;
+        width: 100%;
+    }
+
+    .color-picker-wrapper {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .color-preview {
+        width: 100%;
+        min-width: 100%;
     }
 
     .menu-template-each-media.landscape {

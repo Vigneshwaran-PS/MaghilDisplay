@@ -659,6 +659,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -667,7 +668,7 @@
 .preview-container-overlay {
   width: 100vw;
   height: 100vh;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;
@@ -680,10 +681,25 @@
     transform: translateY(30px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+/* Overlay-specific grid styles - ensure proper fit */
+.preview-container-overlay .preview-grid {
+  gap: 10px;
+  min-height: 0;
+  height: calc(100vh - 100px);
+}
+
+.preview-container-overlay .preview-column {
+  gap: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
 }
 
 /* ================================ BASE STYLES ================================ */
@@ -692,12 +708,18 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 30px;
-  margin-bottom: 20px;
+  padding: 12px 20px;
+  margin-bottom: 10px;
   background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   flex-shrink: 0;
+  z-index: 10;
+}
+
+.preview-header-fixed {
+  position: sticky;
+  top: 0;
 }
 
 .preview-title {
@@ -808,15 +830,16 @@
 }
 
 .preview-category-header {
-  padding: 16px 20px;
+  padding: 10px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  min-height: 50px;
 }
 
 .preview-category-header h2 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin: 0;
   font-weight: 700;
   text-transform: uppercase;
@@ -839,21 +862,21 @@
 .preview-category-items {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  padding: 12px 16px 16px 16px;
+  gap: 4px;
+  padding: 8px 10px 10px 10px;
   flex: 1;
   overflow: visible;
   min-height: 0;
 }
 
 .preview-menu-item {
-  padding: 10px 14px;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 8px 12px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  height: 50px;
-  min-height: 50px;
-  max-height: 50px;
+  height: 45px;
+  min-height: 45px;
+  max-height: 45px;
   display: flex;
   align-items: center;
   flex-shrink: 0;
@@ -876,7 +899,7 @@
 
 .preview-item-name {
   flex: 1;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.3;
   overflow: hidden;
@@ -885,7 +908,7 @@
 }
 
 .preview-item-price {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   font-weight: 800;
   white-space: nowrap;
   letter-spacing: 0.5px;

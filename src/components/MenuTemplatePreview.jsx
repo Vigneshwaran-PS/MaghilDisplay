@@ -3,128 +3,205 @@ import "../styles/MenuTemplatePreview.css";
 import { GCP_API } from "../api/api";
 
 const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMenuItems, onClose }) => {
+  console.log("menuData", menuData);
   const orientation = menuTemplate?.orientation || "LANDSCAPE";
   const isLandscape = orientation === "LANDSCAPE";
-  const columnsPerSlide = isLandscape ? 3 : 2;
-  
+
+  // Configuration constants - easily changeable
+  const CONFIG = {
+    LANDSCAPE: {
+      columnsPerPage: 3,
+      itemsPerColumn: 13,
+      itemsPerPage: 39,
+      mediaThreshold: 75 // Show media if column has more than 75% height remaining
+    },
+    PORTRAIT: {
+      columnsPerPage: 2,
+      itemsPerColumn: 20,
+      itemsPerPage: 40,
+      mediaThreshold: 75 // Show media if column has more than 75% height remaining
+    }
+  };
+
+  const config = isLandscape ? CONFIG.LANDSCAPE : CONFIG.PORTRAIT;
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [slides, setSlides] = useState([]);
   const containerRef = useRef(null);
+  const gridRef = useRef(null);
 
-  const getItemsByCategory = () => {
-    const categoriesWithItems = [];
-    
+  // Get all selected items sequentially (flattened from categories)
+  const getAllSelectedItems = () => {
+    const allItems = [];
+
     menuData?.categories?.forEach(category => {
-      const categoryItems = category.items.filter(item => 
-        selectedMenuItems?.includes(item.itemId) && item.enabled && item.active
-      );
-      
-      if (categoryItems.length > 0) {
-        categoriesWithItems.push({
-          categoryId: category.categoryId,
-          categoryName: category.categoryName,
-          items: categoryItems
-        });
+      category.items.forEach(item => {
+        if (selectedMenuItems?.includes(item.itemId) && item.enabled && item.active) {
+          allItems.push({
+            ...item,
+            categoryId: category.categoryId,
+            categoryName: category.categoryName
+          });
+        }
+      });
+    });
+
+    return allItems;
+  };
+
+  // Calculate heights
+  const getCategoryHeaderHeight = () => 50; // Reduced padding
+  const getItemHeight = () => 45; // Reduced item height
+  const getCategoryPadding = () => 10; // Reduced padding
+
+  const calculateCategoryHeight = (itemCount) => {
+    return getCategoryHeaderHeight() + (itemCount * getItemHeight()) + getCategoryPadding();
+  };
+
+  const calculateColumnHeight = (items) => {
+    if (items.length === 0) return 0;
+
+    let height = 0;
+    let currentCategory = null;
+
+    items.forEach(item => {
+      if (item.type === 'category') {
+        height += calculateCategoryHeight(item.items.length);
+        currentCategory = item.category.categoryName;
+      } else if (item.type === 'media') {
+        // Media takes remaining space
+        height += 0; // Will be handled separately
       }
     });
-    
-    return categoriesWithItems;
+
+    return height;
   };
 
-  const categoriesWithItems = getItemsByCategory();
-
-  const columnHasSpaceForMedia = (columnHeight, maxHeight) => {
-    const usedPercentage = (columnHeight / maxHeight) * 100;
-    return usedPercentage < 50;
-  };
-
-  const estimateCategoryHeight = (itemCount) => {
-    const headerHeight = 70;
-    const itemHeight = 40;
-    const padding = 30;
-    return headerHeight + (itemCount * itemHeight) + padding;
-  };
-
-  const distributeContent = () => {
+  const distributeItemsIntoPages = () => {
     if (!containerRef.current) return [];
-    
-    const maxColumnHeight = containerRef.current.clientHeight - 150;
-    const allSlides = [];
-    let currentSlideColumns = Array(columnsPerSlide).fill(null).map(() => []);
-    let currentSlideHeights = Array(columnsPerSlide).fill(0);
-    let categoryIndex = 0;
-    let currentColumnIndex = 0;
 
-    const categoriesCopy = JSON.parse(JSON.stringify(categoriesWithItems));
+    const allItems = getAllSelectedItems();
+    const sortedMediasBySequence = sortedMedias
+      ? [...sortedMedias].sort((a, b) => (a.sequenceNo || 0) - (b.sequenceNo || 0))
+      : [];
 
-    while (categoryIndex < categoriesCopy.length) {
-      const category = categoriesCopy[categoryIndex];
-      const categoryHeight = estimateCategoryHeight(category.items.length);
-      
-      if (currentSlideHeights[currentColumnIndex] + categoryHeight <= maxColumnHeight) {
-        currentSlideColumns[currentColumnIndex].push({
-          type: 'category',
-          category: category,
-          items: category.items
-        });
-        currentSlideHeights[currentColumnIndex] += categoryHeight;
-        categoryIndex++;
-      } else {
-        const availableHeight = maxColumnHeight - currentSlideHeights[currentColumnIndex];
-        const headerHeight = 80;
-        const itemHeight = 50;
-        const padding = 50;
-        
-        const itemsThatFit = Math.floor((availableHeight - headerHeight - padding) / itemHeight);
-        
-        if (itemsThatFit > 0 && currentSlideHeights[currentColumnIndex] > 0) {
-          const itemsForThisColumn = category.items.slice(0, itemsThatFit);
-          const remainingItems = category.items.slice(itemsThatFit);
-          
-          currentSlideColumns[currentColumnIndex].push({
-            type: 'category',
-            category: { ...category, items: itemsForThisColumn },
-            items: itemsForThisColumn,
-            isSplit: true
+    // Get available height for content (100vh - header - padding)
+    const headerHeight = 80;
+    const pagePadding = 20;
+    const availableHeight = window.innerHeight - headerHeight - pagePadding;
+
+    const allPages = [];
+    let itemIndex = 0;
+    let mediaIndex = 0;
+
+    // Group items by category first
+    const itemsByCategory = [];
+    let currentCategory = null;
+    let currentCategoryItems = [];
+
+    allItems.forEach((item, idx) => {
+      if (currentCategory !== item.categoryName) {
+        if (currentCategory !== null && currentCategoryItems.length > 0) {
+          itemsByCategory.push({
+            categoryId: currentCategoryItems[0].categoryId,
+            categoryName: currentCategory,
+            items: [...currentCategoryItems]
           });
-          
-          currentSlideHeights[currentColumnIndex] = maxColumnHeight;
-          
-          categoriesCopy[categoryIndex] = {
-            ...category,
-            items: remainingItems
-          };
         }
-        
-        currentColumnIndex++;
-        
-        if (currentColumnIndex >= columnsPerSlide) {
-          allSlides.push([...currentSlideColumns]);
-          currentSlideColumns = Array(columnsPerSlide).fill(null).map(() => []);
-          currentSlideHeights = Array(columnsPerSlide).fill(0);
-          currentColumnIndex = 0;
+        currentCategory = item.categoryName;
+        currentCategoryItems = [item];
+      } else {
+        currentCategoryItems.push(item);
+      }
+    });
+
+    // Add last category
+    if (currentCategory !== null && currentCategoryItems.length > 0) {
+      itemsByCategory.push({
+        categoryId: currentCategoryItems[0].categoryId,
+        categoryName: currentCategory,
+        items: [...currentCategoryItems]
+      });
+    }
+
+    // Distribute categories across pages and columns
+    let categoryIndex = 0;
+
+    while (categoryIndex < itemsByCategory.length) {
+      const pageColumns = Array(config.columnsPerPage).fill(null).map(() => []);
+      const columnItemCounts = Array(config.columnsPerPage).fill(0);
+      const columnHeights = Array(config.columnsPerPage).fill(0);
+      let currentColumn = 0;
+
+      // Fill columns with categories
+      while (categoryIndex < itemsByCategory.length &&
+        currentColumn < config.columnsPerPage) {
+
+        const category = itemsByCategory[categoryIndex];
+        const itemsToAdd = [];
+        let itemsAdded = 0;
+
+        // Add items up to the column limit
+        for (let i = 0; i < category.items.length && columnItemCounts[currentColumn] < config.itemsPerColumn; i++) {
+          itemsToAdd.push(category.items[i]);
+          itemsAdded++;
+        }
+
+        if (itemsToAdd.length > 0) {
+          const categoryHeight = calculateCategoryHeight(itemsToAdd.length);
+
+          // Check if it fits in current column
+          if (columnItemCounts[currentColumn] + itemsToAdd.length <= config.itemsPerColumn) {
+            pageColumns[currentColumn].push({
+              type: 'category',
+              category: {
+                categoryId: category.categoryId,
+                categoryName: category.categoryName,
+                items: itemsToAdd
+              },
+              items: itemsToAdd
+            });
+
+            columnItemCounts[currentColumn] += itemsToAdd.length;
+            columnHeights[currentColumn] += categoryHeight;
+
+            // Remove added items from category
+            category.items = category.items.slice(itemsAdded);
+
+            // If category is empty, move to next
+            if (category.items.length === 0) {
+              categoryIndex++;
+            }
+          } else {
+            // Column is full, move to next column
+            currentColumn++;
+          }
+        } else {
+          // No items to add, move to next category
+          categoryIndex++;
+        }
+
+        // If current column is full, move to next
+        if (columnItemCounts[currentColumn] >= config.itemsPerColumn) {
+          currentColumn++;
+        }
+
+        // If all columns are full, break to create new page
+        if (currentColumn >= config.columnsPerPage) {
+          break;
         }
       }
-    }
 
-    if (currentSlideColumns.some(col => col.length > 0)) {
-      allSlides.push(currentSlideColumns);
-    }
+      // Add media as filler
+      pageColumns.forEach((column, colIndex) => {
+        const usedHeight = columnHeights[colIndex];
+        const usedPercentage = availableHeight > 0 ? (usedHeight / availableHeight) * 100 : 0;
+        const remainingPercentage = 100 - usedPercentage;
 
-    if (sortedMedias && sortedMedias.length > 0) {
-      const sortedMediasBySequence = [...sortedMedias].sort((a, b) => a.sequenceNo - b.sequenceNo);
-      let mediaIndex = 0;
-      
-      allSlides.forEach((slide) => {
-        slide.forEach((column, colIndex) => {
-          const columnHeight = column.reduce((sum, item) => {
-            if (item.type === 'category') {
-              return sum + estimateCategoryHeight(item.items.length);
-            }
-            return sum;
-          }, 0);
-          
-          if (columnHasSpaceForMedia(columnHeight, maxColumnHeight) && mediaIndex < sortedMediasBySequence.length) {
+        // For portrait column 2: if empty or >75% space, add media
+        if (!isLandscape && colIndex === 1) {
+          if ((columnItemCounts[colIndex] === 0 || remainingPercentage > config.mediaThreshold) &&
+            mediaIndex < sortedMediasBySequence.length) {
             column.push({
               type: 'media',
               media: sortedMediasBySequence[mediaIndex],
@@ -132,33 +209,49 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
             });
             mediaIndex++;
           }
-        });
+        }
+        // For landscape: if >75% space remaining, add media
+        else if (isLandscape && remainingPercentage > config.mediaThreshold &&
+          mediaIndex < sortedMediasBySequence.length) {
+          column.push({
+            type: 'media',
+            media: sortedMediasBySequence[mediaIndex],
+            sequenceNo: sortedMediasBySequence[mediaIndex].sequenceNo
+          });
+          mediaIndex++;
+        }
       });
+
+      // Add page if it has content
+      if (pageColumns.some(col => col.length > 0)) {
+        allPages.push(pageColumns);
+      }
     }
 
-    return allSlides;
+    return allPages;
   };
 
   useEffect(() => {
     const handleResize = () => {
-      const distributed = distributeContent();
-      setSlides(distributed);
+      const pages = distributeItemsIntoPages();
+      setSlides(pages);
     };
 
-    setTimeout(handleResize, 100);
-    
+    const timeoutId = setTimeout(handleResize, 100);
+
     window.addEventListener('resize', handleResize);
-    
+
     return () => {
+      clearTimeout(timeoutId);
       window.removeEventListener('resize', handleResize);
     };
-  }, [menuData, selectedMenuItems, orientation, sortedMedias]);
+  }, [menuData, selectedMenuItems, orientation, sortedMedias, menuTemplate]);
 
   const getMediaUrl = (media) => {
     if (!media) return "";
     const mediaId = media?.mediaId;
     let fileExtension;
-    
+
     if (media?.mimeType) {
       fileExtension = media.mimeType.split("/")[1];
     } else if (media?.mediaType) {
@@ -173,12 +266,12 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
   if (!slides.length) {
     return (
       <div className="preview-overlay">
-        <div 
-          className="preview-container-overlay" 
-          ref={containerRef} 
+        <div
+          className="preview-container-overlay"
+          ref={containerRef}
           style={{ background: menuTemplate?.backgroundColor || '#ffffff' }}
         >
-          <div className="preview-header-overlay">
+          <div className="preview-header-overlay preview-header-fixed">
             <h1 className="preview-title">{menuTemplate?.displayName || 'Menu Preview'}</h1>
             <button onClick={onClose} className="preview-back-btn">✕ Close Preview</button>
           </div>
@@ -190,21 +283,21 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
 
   return (
     <div className="preview-overlay">
-      <div 
+      <div
         className="preview-container-overlay"
         ref={containerRef}
         style={{
           background: menuTemplate?.backgroundColor || '#ffffff'
         }}
       >
-        <div className="preview-header-overlay">
+        <div className="preview-header-overlay preview-header-fixed">
           <h1 className="preview-title">
             {menuTemplate?.displayName || 'Menu Preview'}
           </h1>
           <div className="preview-header-actions">
             {slides.length > 1 && (
               <div className="preview-pagination">
-                <span>Slide {currentSlide + 1} of {slides.length}</span>
+                <span>Page {currentSlide + 1} of {slides.length}</span>
               </div>
             )}
             <button onClick={onClose} className="preview-back-btn">
@@ -213,7 +306,10 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
           </div>
         </div>
 
-        <div className={`preview-grid ${isLandscape ? 'landscape' : 'portrait'}`}>
+        <div
+          ref={gridRef}
+          className={`preview-grid ${isLandscape ? 'landscape' : 'portrait'}`}
+        >
           {slides[currentSlide]?.map((columnContent, colIndex) => (
             <div
               key={colIndex}
@@ -222,7 +318,7 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
               {columnContent.map((content, contentIndex) => {
                 if (content.type === 'category') {
                   return (
-                    <div 
+                    <div
                       key={`${content.category.categoryId}-${contentIndex}`}
                       className="preview-category-card"
                       style={{
@@ -230,7 +326,7 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                         border: `2px solid ${menuTemplate?.categoryTextColor || '#333'}`
                       }}
                     >
-                      <div 
+                      <div
                         className="preview-category-header"
                         style={{
                           color: menuTemplate?.categoryTextColor || '#333',
@@ -239,10 +335,9 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                         }}
                       >
                         <h2>{content.category.categoryName}</h2>
-                        {content.isSplit && <span className="split-indicator">(continued...)</span>}
                       </div>
-                      
-                      <div 
+
+                      <div
                         className="preview-category-items"
                         style={{
                           background: menuTemplate?.categoryCardBackgroundColor || '#f5f5f5'
@@ -258,7 +353,7 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                             }}
                           >
                             <div className="preview-item-content">
-                              <div 
+                              <div
                                 className="preview-item-name"
                                 style={{
                                   color: menuTemplate?.itemCardTextColor || '#333'
@@ -266,7 +361,7 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                               >
                                 {item.itemName}
                               </div>
-                              <div 
+                              <div
                                 className="preview-item-price"
                                 style={{
                                   color: menuTemplate?.itemPriceTextColor || '#e74c3c'
@@ -281,11 +376,14 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                     </div>
                   );
                 } else if (content.type === 'media') {
-                  const isVideo = content.media.mediaType?.toLowerCase() === 'video' || 
-                                 content.media.mimeType?.startsWith('video/');
-                  
+                  const isVideo = content.media.mediaType?.toLowerCase() === 'video' ||
+                    content.media.mimeType?.startsWith('video/');
+
                   return (
-                    <div key={`media-${colIndex}-${contentIndex}-seq-${content.sequenceNo}`} className="preview-media-container">
+                    <div
+                      key={`media-${colIndex}-${contentIndex}-seq-${content.sequenceNo}`}
+                      className="preview-media-container preview-media-filler"
+                    >
                       <div className="preview-media-content">
                         {isVideo ? (
                           <video
@@ -297,7 +395,7 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                             className="preview-media-video"
                           />
                         ) : (
-                          <img 
+                          <img
                             src={getMediaUrl(content.media)}
                             alt={content.media.name}
                             className="preview-media-image"
@@ -321,7 +419,7 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                 className={`slide-indicator ${index === currentSlide ? 'active' : ''}`}
                 onClick={() => setCurrentSlide(index)}
                 style={{
-                  background: index === currentSlide 
+                  background: index === currentSlide
                     ? menuTemplate?.itemPriceTextColor || '#e74c3c'
                     : 'rgba(0, 0, 0, 0.2)'
                 }}

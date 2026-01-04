@@ -33,7 +33,7 @@ const AddEditMenuTemplate = () => {
       itemPriceTextColor: '#e74c3c'
     }
   );
-  
+
   const [orderTypeDetails, setOrderTypeDetails] = useState({});
   const [currentOrientation, setCurrentOrientation] = useState("PORTRAIT");
   const [mediasLoading, setMediasLoading] = useState(false);
@@ -58,8 +58,8 @@ const AddEditMenuTemplate = () => {
   });
   const [isSaving, setIsSaving] = useState(false);
   const [selectedMenuItems, setSelectedMenuItems] = useState(
-    routerLocation.state?.selectedMenuItems 
-      ? new Set(routerLocation.state.selectedMenuItems) 
+    routerLocation.state?.selectedMenuItems
+      ? new Set(routerLocation.state.selectedMenuItems)
       : new Set()
   );
   const [expandedCategories, setExpandedCategories] = useState(new Set());
@@ -76,13 +76,13 @@ const AddEditMenuTemplate = () => {
   }, [locationDetials]);
 
   useEffect(() => {
-    if(locationDetials?.id && orderTypeDetails?.id){
+    if (locationDetials?.id && orderTypeDetails?.id) {
       dispatch(menuThunk({
         locationId: locationDetials?.id,
         orderTypeId: orderTypeDetails?.id
       }));
     }
-  },[orderTypeDetails]);
+  }, [orderTypeDetails]);
 
   const handleDisplayNameChange = (e) => {
     setMenuTemplate({
@@ -93,7 +93,7 @@ const AddEditMenuTemplate = () => {
 
   const handleOrientationChange = (e) => {
     const newOrientation = e.target.value;
-    
+
     setSelectedMediaIds(new Set());
     setSortedMedias([]);
     setMenuTemplate((prev) => ({
@@ -360,7 +360,7 @@ const AddEditMenuTemplate = () => {
 
   const handleCategorySelect = (category, isChecked) => {
     const newSelected = new Set(selectedMenuItems);
-    
+
     category.items.forEach(item => {
       if (item.enabled && item.active) {
         if (isChecked) {
@@ -370,19 +370,19 @@ const AddEditMenuTemplate = () => {
         }
       }
     });
-    
+
     setSelectedMenuItems(newSelected);
   };
 
   const handleItemSelect = (itemId, isChecked) => {
     const newSelected = new Set(selectedMenuItems);
-    
+
     if (isChecked) {
       newSelected.add(itemId);
     } else {
       newSelected.delete(itemId);
     }
-    
+
     setSelectedMenuItems(newSelected);
   };
 
@@ -407,7 +407,7 @@ const AddEditMenuTemplate = () => {
   const handleClosePreview = () => {
     setShowPreview(false);
   };
-  
+
   const handleSave = async () => {
     if (!isFormValid()) {
       dispatch(
@@ -430,14 +430,14 @@ const AddEditMenuTemplate = () => {
 
   const isFormValid = () => {
     const hasName = menuTemplate.displayName?.trim().length > 0;
-    const hasAllColors = menuTemplate.backgroundColor && 
-                        menuTemplate.categoryCardBackgroundColor &&
-                        menuTemplate.categoryTextColor &&
-                        menuTemplate.itemCardBackgroundColor &&
-                        menuTemplate.itemCardTextColor &&
-                        menuTemplate.itemPriceTextColor;
+    const hasAllColors = menuTemplate.backgroundColor &&
+      menuTemplate.categoryCardBackgroundColor &&
+      menuTemplate.categoryTextColor &&
+      menuTemplate.itemCardBackgroundColor &&
+      menuTemplate.itemCardTextColor &&
+      menuTemplate.itemPriceTextColor;
     const hasMinMenuItems = selectedMenuItems.size >= 10;
-    
+
     return hasName && hasAllColors && hasMinMenuItems;
   };
 
@@ -447,75 +447,77 @@ const AddEditMenuTemplate = () => {
         <div className="menu-template-header">
           <h2> New Menu Template </h2>
         </div>
-        
-        <div className="menu-template-configuration">
-          <div className="menu-template-config-header">
-            Display Configuration
-          </div>
-          <div className="menu-template-config-name">
-            <h4> Display Name: </h4>
-            <input
-              type="text"
-              value={menuTemplate?.displayName || ""}
-              name="displayName"
-              onChange={handleDisplayNameChange}
-              placeholder="Enter display name (Max 60 characters)"
-              maxLength={60}
-            />
-          </div>
-          <div className="menu-template-config-type">
-            <h4> Orientation: </h4>
-            <select
-              name="orientation"
-              value={menuTemplate?.orientation || "LANDSCAPE"}
-              onChange={handleOrientationChange}
-            >
-              <option value="LANDSCAPE"> LANDSCAPE </option>
-              <option value="PORTRAIT"> PORTRAIT </option>
-            </select>
-          </div>
-          <div className="menu-template-config-refresh-time">
-            <h4> Menu Refresh Time: </h4>
-            <input
-              type="text"
-              value={menuTemplate?.menuRefreshTimeInMins || ""}
-              name="menuRefreshTimeInMins"
-              onChange={handleMenuRefreshTimeChange}
-              placeholder="Enter menu refresh time (Min 5mins, Max 60mins)"
-              maxLength={60}
-            />
-          </div>
-        </div>
 
-        <div className="menu-template-color-configuration">
-          <div className="menu-template-color-config-header">
-            Color Configuration
+        <div className="menu-template-config-wrapper">
+          <div className="menu-template-configuration">
+            <div className="menu-template-config-header">
+              Display Configuration
+            </div>
+            <div className="menu-template-config-name">
+              <h4> Display Name: </h4>
+              <input
+                type="text"
+                value={menuTemplate?.displayName || ""}
+                name="displayName"
+                onChange={handleDisplayNameChange}
+                placeholder="Enter display name (Max 60 characters)"
+                maxLength={60}
+              />
+            </div>
+            <div className="menu-template-config-type">
+              <h4> Orientation: </h4>
+              <select
+                name="orientation"
+                value={menuTemplate?.orientation || "LANDSCAPE"}
+                onChange={handleOrientationChange}
+              >
+                <option value="LANDSCAPE"> LANDSCAPE </option>
+                <option value="PORTRAIT"> PORTRAIT </option>
+              </select>
+            </div>
+            <div className="menu-template-config-refresh-time">
+              <h4> Menu Refresh Time: </h4>
+              <input
+                type="text"
+                value={menuTemplate?.menuRefreshTimeInMins || ""}
+                name="menuRefreshTimeInMins"
+                onChange={handleMenuRefreshTimeChange}
+                placeholder="Enter menu refresh time (Min 5mins, Max 60mins)"
+                maxLength={60}
+              />
+            </div>
           </div>
-          {[
-            { key: 'backgroundColor', label: 'Background Color' },
-            { key: 'categoryCardBackgroundColor', label: 'Category Card Background' },
-            { key: 'categoryTextColor', label: 'Category Text Color' },
-            { key: 'itemCardBackgroundColor', label: 'Item Card Background' },
-            { key: 'itemCardTextColor', label: 'Item Text Color' },
-            { key: 'itemPriceTextColor', label: 'Item Price Color' }
-          ].map(({ key, label }) => (
-            <div className="menu-template-config-color" key={key}>
-              <h4> {label}: </h4>
-              <div className="color-picker-wrapper">
-                <div
-                  className="color-preview"
-                  style={{
-                    backgroundColor: menuTemplate?.[key] || '#ffffff',
-                  }}
-                  onClick={() => toggleColorPicker(key)}
-                >
-                  <span>
-                    {menuTemplate?.[key] || '#ffffff'}
-                  </span>
+
+          <div className="menu-template-color-configuration">
+            <div className="menu-template-color-config-header">
+              Color Configuration
+            </div>
+            {[
+              { key: 'backgroundColor', label: 'Background Color' },
+              { key: 'categoryCardBackgroundColor', label: 'Category Card Background' },
+              { key: 'categoryTextColor', label: 'Category Text Color' },
+              { key: 'itemCardBackgroundColor', label: 'Item Card Background' },
+              { key: 'itemCardTextColor', label: 'Item Text Color' },
+              { key: 'itemPriceTextColor', label: 'Item Price Color' }
+            ].map(({ key, label }) => (
+              <div className="menu-template-config-color" key={key}>
+                <h4> {label}: </h4>
+                <div className="color-picker-wrapper">
+                  <div
+                    className="color-preview"
+                    style={{
+                      backgroundColor: menuTemplate?.[key] || '#ffffff',
+                    }}
+                    onClick={() => toggleColorPicker(key)}
+                  >
+                    <span>
+                      {menuTemplate?.[key] || '#ffffff'}
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {Object.keys(showColorPicker).map(
@@ -571,9 +573,8 @@ const AddEditMenuTemplate = () => {
 
                   return (
                     <div
-                      className={`menu-template-each-media ${getOrientation()} ${
-                        draggedIndex === index ? "dragging" : ""
-                      }`}
+                      className={`menu-template-each-media ${getOrientation()} ${draggedIndex === index ? "dragging" : ""
+                        }`}
                       key={media?.mediaId}
                       draggable
                       onDragStart={(e) => handleDragStart(e, index)}
@@ -649,7 +650,7 @@ const AddEditMenuTemplate = () => {
                         onChange={(e) => handleCategorySelect(category, e.target.checked)}
                       />
                     </div>
-                    <div 
+                    <div
                       className="menu-category-title"
                       onClick={() => toggleCategory(category.categoryId)}
                     >
@@ -662,7 +663,7 @@ const AddEditMenuTemplate = () => {
                       </span>
                     </div>
                   </div>
-                  
+
                   {expandedCategories.has(category.categoryId) && (
                     <div className="menu-items-list">
                       {category.items
@@ -691,23 +692,23 @@ const AddEditMenuTemplate = () => {
         </div>
 
         <div className="menu-template-actions">
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="menu-template-cancel-btn"
             onClick={handleCancel}
           >
             Cancel
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="menu-template-preview-btn"
             onClick={handlePreview}
             disabled={!isFormValid()}
           >
             Preview
           </button>
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="menu-template-save-btn"
             onClick={handleSave}
             disabled={!isFormValid() || isSaving}
@@ -746,9 +747,8 @@ const AddEditMenuTemplate = () => {
                       const isSelected = isMediaSelected(media);
                       return (
                         <div
-                          className={`menu-template-single-media ${getOrientation()} ${
-                            isSelected ? "selected" : ""
-                          }`}
+                          className={`menu-template-single-media ${getOrientation()} ${isSelected ? "selected" : ""
+                            }`}
                           key={media?.mediaId}
                         >
                           <div className="is-media-selected">
