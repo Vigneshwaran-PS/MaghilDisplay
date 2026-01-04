@@ -67,6 +67,12 @@ const Modules = () => {
             navigate(`${route}/${locationId}/${templateId}`);
             return;
         }
+
+        if(templateType == "menu"){
+            const route = "/dashboard/modules/menu"
+            navigate(`${route}/${locationId}/${templateId}`);
+            return;
+        }
     }
     
   return (
