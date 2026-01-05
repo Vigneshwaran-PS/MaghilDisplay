@@ -3,7 +3,7 @@ import '../styles/Spotlight.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom';
 import { spotLightMediasThunk, spotLightThunk } from '../thunks/SpotLightThunk';
-import noData from '../assets/icons/noData.png'
+import noData from '../assets/icons/NoData.png'
 import playIcon from '../assets/icons/PlayIcon.png'
 import viewDetails from '../assets/icons/ViewDetails.png'
 import Loader from '../components/Loader.jsx'
