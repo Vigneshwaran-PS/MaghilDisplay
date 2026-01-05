@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo, useCallback } from "react";
 import "../styles/MenuTemplatePreview.css";
 import { GCP_API } from "../api/api";
 
@@ -7,21 +7,23 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
   const orientation = menuTemplate?.orientation || "LANDSCAPE";
   const isLandscape = orientation === "LANDSCAPE";
 
-  // Configuration constants - easily changeable
-  const CONFIG = {
+  // Fixed configuration - no dynamic calculations
+  const CONFIG = useMemo(() => ({
     LANDSCAPE: {
       columnsPerPage: 3,
       itemsPerColumn: 13,
-      itemsPerPage: 39,
-      mediaThreshold: 75 // Show media if column has more than 75% height remaining
+      itemHeight: 45, // Fixed height for each item
+      categoryHeaderHeight: 50,
+      itemSpacing: 5
     },
     PORTRAIT: {
       columnsPerPage: 2,
       itemsPerColumn: 20,
-      itemsPerPage: 40,
-      mediaThreshold: 75 // Show media if column has more than 75% height remaining
+      itemHeight: 30, // Fixed height for each item
+      categoryHeaderHeight: 35,
+      itemSpacing: 1
     }
-  };
+  }), []);
 
   const config = isLandscape ? CONFIG.LANDSCAPE : CONFIG.PORTRAIT;
 
@@ -30,8 +32,8 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
   const containerRef = useRef(null);
   const gridRef = useRef(null);
 
-  // Get all selected items sequentially (flattened from categories)
-  const getAllSelectedItems = () => {
+  // Get all selected items
+  const getAllSelectedItems = useMemo(() => {
     const allItems = [];
 
     menuData?.categories?.forEach(category => {
@@ -47,62 +49,18 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
     });
 
     return allItems;
-  };
+  }, [menuData, selectedMenuItems]);
 
-  // Calculate heights
-  const getCategoryHeaderHeight = () => 50; // Reduced padding
-  const getItemHeight = () => 45; // Reduced item height
-  const getCategoryPadding = () => 10; // Reduced padding
-
-  const calculateCategoryHeight = (itemCount) => {
-    return getCategoryHeaderHeight() + (itemCount * getItemHeight()) + getCategoryPadding();
-  };
-
-  const calculateColumnHeight = (items) => {
-    if (items.length === 0) return 0;
-
-    let height = 0;
-    let currentCategory = null;
-
-    items.forEach(item => {
-      if (item.type === 'category') {
-        height += calculateCategoryHeight(item.items.length);
-        currentCategory = item.category.categoryName;
-      } else if (item.type === 'media') {
-        // Media takes remaining space
-        height += 0; // Will be handled separately
-      }
-    });
-
-    return height;
-  };
-
-  const distributeItemsIntoPages = () => {
-    if (!containerRef.current) return [];
-
-    const allItems = getAllSelectedItems();
-    const sortedMediasBySequence = sortedMedias
-      ? [...sortedMedias].sort((a, b) => (a.sequenceNo || 0) - (b.sequenceNo || 0))
-      : [];
-
-    // Get available height for content (100vh - header - padding)
-    const headerHeight = 80;
-    const pagePadding = 20;
-    const availableHeight = window.innerHeight - headerHeight - pagePadding;
-
-    const allPages = [];
-    let itemIndex = 0;
-    let mediaIndex = 0;
-
-    // Group items by category first
-    const itemsByCategory = [];
+  // Group items by category
+  const itemsByCategory = useMemo(() => {
+    const itemsByCat = [];
     let currentCategory = null;
     let currentCategoryItems = [];
 
-    allItems.forEach((item, idx) => {
+    getAllSelectedItems.forEach((item) => {
       if (currentCategory !== item.categoryName) {
         if (currentCategory !== null && currentCategoryItems.length > 0) {
-          itemsByCategory.push({
+          itemsByCat.push({
             categoryId: currentCategoryItems[0].categoryId,
             categoryName: currentCategory,
             items: [...currentCategoryItems]
@@ -117,64 +75,69 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
 
     // Add last category
     if (currentCategory !== null && currentCategoryItems.length > 0) {
-      itemsByCategory.push({
+      itemsByCat.push({
         categoryId: currentCategoryItems[0].categoryId,
         categoryName: currentCategory,
         items: [...currentCategoryItems]
       });
     }
 
-    // Distribute categories across pages and columns
+    return itemsByCat;
+  }, [getAllSelectedItems]);
+
+  // Simple distribution algorithm
+  const distributeItemsIntoPages = useCallback(() => {
+    if (itemsByCategory.length === 0) return [];
+    
+    console.log("Distributing items:", itemsByCategory.length, "categories");
+    console.log("Config:", config);
+
+    const allPages = [];
     let categoryIndex = 0;
+    let mediaIndex = 0;
+
+    // Sort medias once
+    const sortedMediasBySequence = sortedMedias
+      ? [...sortedMedias].sort((a, b) => (a.sequenceNo || 0) - (b.sequenceNo || 0))
+      : [];
 
     while (categoryIndex < itemsByCategory.length) {
       const pageColumns = Array(config.columnsPerPage).fill(null).map(() => []);
       const columnItemCounts = Array(config.columnsPerPage).fill(0);
-      const columnHeights = Array(config.columnsPerPage).fill(0);
       let currentColumn = 0;
 
       // Fill columns with categories
-      while (categoryIndex < itemsByCategory.length &&
-        currentColumn < config.columnsPerPage) {
-
-        const category = itemsByCategory[categoryIndex];
-        const itemsToAdd = [];
-        let itemsAdded = 0;
-
-        // Add items up to the column limit
-        for (let i = 0; i < category.items.length && columnItemCounts[currentColumn] < config.itemsPerColumn; i++) {
-          itemsToAdd.push(category.items[i]);
-          itemsAdded++;
-        }
-
-        if (itemsToAdd.length > 0) {
-          const categoryHeight = calculateCategoryHeight(itemsToAdd.length);
-
-          // Check if it fits in current column
-          if (columnItemCounts[currentColumn] + itemsToAdd.length <= config.itemsPerColumn) {
-            pageColumns[currentColumn].push({
-              type: 'category',
-              category: {
-                categoryId: category.categoryId,
-                categoryName: category.categoryName,
-                items: itemsToAdd
-              },
+      while (categoryIndex < itemsByCategory.length && currentColumn < config.columnsPerPage) {
+        const category = { ...itemsByCategory[categoryIndex] }; // Copy to avoid mutation issues
+        
+        // Calculate how many items we can add
+        const remainingInColumn = config.itemsPerColumn - columnItemCounts[currentColumn];
+        const itemsToTake = Math.min(remainingInColumn, category.items.length);
+        
+        if (itemsToTake > 0) {
+          const itemsToAdd = category.items.slice(0, itemsToTake);
+          
+          pageColumns[currentColumn].push({
+            type: 'category',
+            category: {
+              categoryId: category.categoryId,
+              categoryName: category.categoryName,
               items: itemsToAdd
-            });
+            },
+            items: itemsToAdd
+          });
 
-            columnItemCounts[currentColumn] += itemsToAdd.length;
-            columnHeights[currentColumn] += categoryHeight;
+          columnItemCounts[currentColumn] += itemsToAdd.length;
 
-            // Remove added items from category
-            category.items = category.items.slice(itemsAdded);
-
-            // If category is empty, move to next
-            if (category.items.length === 0) {
-              categoryIndex++;
-            }
+          // Update the category items (this is okay since we're working with a copy)
+          category.items = category.items.slice(itemsToTake);
+          
+          // If this category still has items, update the original array
+          if (category.items.length > 0) {
+            itemsByCategory[categoryIndex] = category;
           } else {
-            // Column is full, move to next column
-            currentColumn++;
+            // Category is empty, move to next
+            categoryIndex++;
           }
         } else {
           // No items to add, move to next category
@@ -185,69 +148,52 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
         if (columnItemCounts[currentColumn] >= config.itemsPerColumn) {
           currentColumn++;
         }
-
-        // If all columns are full, break to create new page
-        if (currentColumn >= config.columnsPerPage) {
-          break;
-        }
       }
 
-      // Add media as filler
-      pageColumns.forEach((column, colIndex) => {
-        const usedHeight = columnHeights[colIndex];
-        const usedPercentage = availableHeight > 0 ? (usedHeight / availableHeight) * 100 : 0;
-        const remainingPercentage = 100 - usedPercentage;
-
-        // For portrait column 2: if empty or >75% space, add media
-        if (!isLandscape && colIndex === 1) {
-          if ((columnItemCounts[colIndex] === 0 || remainingPercentage > config.mediaThreshold) &&
-            mediaIndex < sortedMediasBySequence.length) {
-            column.push({
-              type: 'media',
-              media: sortedMediasBySequence[mediaIndex],
-              sequenceNo: sortedMediasBySequence[mediaIndex].sequenceNo
-            });
-            mediaIndex++;
-          }
-        }
-        // For landscape: if >75% space remaining, add media
-        else if (isLandscape && remainingPercentage > config.mediaThreshold &&
+      // Add media as filler in the last column if there's space
+      const lastColumnIndex = config.columnsPerPage - 1;
+      if (columnItemCounts[lastColumnIndex] < config.itemsPerColumn && 
           mediaIndex < sortedMediasBySequence.length) {
-          column.push({
-            type: 'media',
-            media: sortedMediasBySequence[mediaIndex],
-            sequenceNo: sortedMediasBySequence[mediaIndex].sequenceNo
-          });
-          mediaIndex++;
-        }
-      });
+        pageColumns[lastColumnIndex].push({
+          type: 'media',
+          media: sortedMediasBySequence[mediaIndex],
+          sequenceNo: sortedMediasBySequence[mediaIndex].sequenceNo
+        });
+        mediaIndex++;
+      }
 
       // Add page if it has content
       if (pageColumns.some(col => col.length > 0)) {
         allPages.push(pageColumns);
+        console.log(`Created page ${allPages.length} with columns:`, pageColumns.map(col => col.length));
       }
     }
 
+    console.log("Total pages created:", allPages.length);
     return allPages;
-  };
+  }, [config, itemsByCategory, sortedMedias]);
 
+  // Update slides
   useEffect(() => {
-    const handleResize = () => {
+    console.log("Updating slides...");
+    
+    if (itemsByCategory.length === 0) {
+      console.log("No items to display");
+      setSlides([]);
+      return;
+    }
+
+    // Simple timeout to ensure DOM is ready
+    const timer = setTimeout(() => {
       const pages = distributeItemsIntoPages();
+      console.log("Slides generated:", pages.length);
       setSlides(pages);
-    };
+    }, 50);
 
-    const timeoutId = setTimeout(handleResize, 100);
+    return () => clearTimeout(timer);
+  }, [distributeItemsIntoPages, itemsByCategory.length]);
 
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      clearTimeout(timeoutId);
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [menuData, selectedMenuItems, orientation, sortedMedias, menuTemplate]);
-
-  const getMediaUrl = (media) => {
+  const getMediaUrl = useCallback((media) => {
     if (!media) return "";
     const mediaId = media?.mediaId;
     let fileExtension;
@@ -261,9 +207,20 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
     }
 
     return `${GCP_API.defaults.baseURL}/${mediaId}.${fileExtension}`;
-  };
+  }, []);
 
-  if (!slides.length) {
+  // Show loading only briefly
+  const [showLoading, setShowLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (showLoading || slides.length === 0) {
     return (
       <div className="preview-overlay">
         <div
@@ -275,7 +232,9 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
             <h1 className="preview-title">{menuTemplate?.displayName || 'Menu Preview'}</h1>
             <button onClick={onClose} className="preview-back-btn">✕ Close Preview</button>
           </div>
-          <div className="preview-loading">Loading preview...</div>
+          <div className="preview-loading">
+            {itemsByCategory.length > 0 ? "Generating preview..." : "No items selected"}
+          </div>
         </div>
       </div>
     );
@@ -331,7 +290,9 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                         style={{
                           color: menuTemplate?.categoryTextColor || '#333',
                           background: menuTemplate?.categoryCardBackgroundColor || '#f5f5f5',
-                          borderBottom: `2px solid ${menuTemplate?.categoryTextColor || '#333'}`
+                          borderBottom: `2px solid ${menuTemplate?.categoryTextColor || '#333'}`,
+                          height: `${config.categoryHeaderHeight}px`,
+                          padding: '0 10px'
                         }}
                       >
                         <h2>{content.category.categoryName}</h2>
@@ -340,7 +301,8 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                       <div
                         className="preview-category-items"
                         style={{
-                          background: menuTemplate?.categoryCardBackgroundColor || '#f5f5f5'
+                          background: menuTemplate?.categoryCardBackgroundColor || '#f5f5f5',
+                          padding: '8px 10px'
                         }}
                       >
                         {content.items.map(item => (
@@ -349,14 +311,17 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                             className="preview-menu-item"
                             style={{
                               background: menuTemplate?.itemCardBackgroundColor || '#ffffff',
-                              borderLeft: `4px solid ${menuTemplate?.itemPriceTextColor || '#e74c3c'}`
+                              borderLeft: `3px solid ${menuTemplate?.itemPriceTextColor || '#e74c3c'}`,
+                              height: `${config.itemHeight}px`,
+                              marginBottom: `${config.itemSpacing}px`
                             }}
                           >
                             <div className="preview-item-content">
                               <div
                                 className="preview-item-name"
                                 style={{
-                                  color: menuTemplate?.itemCardTextColor || '#333'
+                                  color: menuTemplate?.itemCardTextColor || '#333',
+                                  fontSize: '14px'
                                 }}
                               >
                                 {item.itemName}
@@ -364,7 +329,9 @@ const MenuTemplatePreview = ({ menuTemplate, sortedMedias, menuData, selectedMen
                               <div
                                 className="preview-item-price"
                                 style={{
-                                  color: menuTemplate?.itemPriceTextColor || '#e74c3c'
+                                  color: menuTemplate?.itemPriceTextColor || '#e74c3c',
+                                  fontSize: '15px',
+                                  fontWeight: 'bold'
                                 }}
                               >
                                 ${item.itemPrice}
