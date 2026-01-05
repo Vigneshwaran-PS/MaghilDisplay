@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/MenuModule.css'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import noData from '../assets/icons/noData.png'
+import noData from '../assets/icons/NoData.png'
 import { deleteSpotLightThunk, spotLightMediasThunk, spotLightThunk } from '../thunks/SpotLightThunk';
 import playIcon from '../assets/icons/PlayIcon.png'
 import viewDetails from '../assets/icons/ViewDetails.png'
